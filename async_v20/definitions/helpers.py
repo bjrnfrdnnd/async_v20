@@ -39,7 +39,8 @@ def json_to_instance_attributes(self, kwargs, template):
             msg = f'`{key}` with value `{value}` supplied to {self.__class__.__qualname__} \n' \
                   f'Possible arguments include: {possible_arguments}'
             logger.error(msg)
-            warnings.warn(msg, UnknownKeywordArgument)
+            raise UnknownKeywordArgument
+            # warnings.warn(msg, UnknownKeywordArgument)
 
 
 def domain_check(value, example=None, possible_values=None):

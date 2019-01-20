@@ -1305,7 +1305,9 @@ class Instrument(Model):
                  maximum_order_units: DecimalNumber = sentinel, margin_rate: DecimalNumber = sentinel,
                  commission: InstrumentCommission = sentinel,
                  guaranteed_stop_loss_order_level_restriction: GuaranteedStopLossOrderLevelRestriction = sentinel,
-                 tags: ArrayDict = sentinel):
+                 tags: ArrayDict = sentinel,
+                 minimum_guaranteed_stop_loss_distance: DecimalNumber = sentinel,
+                 guaranteed_stop_loss_order_execution_premium: DecimalNumber = sentinel):
         Model.__init__(**locals())
 
 
@@ -1380,7 +1382,7 @@ class AccountChangesState(Model):
                  pl: AccountUnits = sentinel,
                  resettable_pl: AccountUnits = sentinel,
                  commission: AccountUnits = sentinel,
-                 guaranteed_execution_fees: AccountUnits = sentinel
+                 guaranteed_execution_fees: AccountUnits = sentinel,
                  ):
         Model.__init__(**locals())
 
@@ -2070,7 +2072,8 @@ class AccountSummary(Model):
                  financing: DecimalNumber = sentinel,
                  guaranteed_stop_loss_order_mode: GuaranteedStopLossOrderMode = sentinel,
                  resettable_pl_time: DateTime = sentinel,
-                 guaranteed_execution_fees: AccountUnits = sentinel
+                 guaranteed_execution_fees: AccountUnits = sentinel,
+                 guaranteed_stop_loss_order_mutability: str = sentinel,
                  ):
         Model.__init__(**locals())
 
@@ -3033,7 +3036,9 @@ class Account(AccountSummary):
                  financing: DecimalNumber = sentinel,
                  guaranteed_stop_loss_order_mode: GuaranteedStopLossOrderMode = sentinel,
                  resettable_pl_time: DateTime = sentinel,
-                 guaranteed_execution_fees: AccountUnits = sentinel):
+                 guaranteed_execution_fees: AccountUnits = sentinel,
+                 guaranteed_stop_loss_order_mutability: str = sentinel,
+                 ):
         Model.__init__(**locals())
 
 

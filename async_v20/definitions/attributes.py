@@ -177,7 +177,14 @@ instance_attributes = {'long': 'long', 'short': 'short', 'default': 'default', '
                        'requestedUnits': 'requested_units', 'requested_units': 'requested_units',
                        'fullVWAP': 'full_vwap', 'full_vwap': 'full_vwap',
                        'initialMarginRequired': 'initial_margin_required',
-                       'initial_margin_required': 'initial_margin_required',}
+                       'initial_margin_required': 'initial_margin_required',
+                       'guaranteedStopLossOrderMutability': 'guaranteed_stop_loss_order_mutability',
+                       'guaranteed_stop_loss_order_mutability': 'guaranteed_stop_loss_order_mutability',
+                       'minimumGuaranteedStopLossDistance': 'minimum_guaranteed_stop_loss_distance',
+                       'minimum_guaranteed_stop_loss_distance': 'minimum_guaranteed_stop_loss_distance',
+                       'guaranteedStopLossOrderExecutionPremium': 'guaranteed_stop_loss_order_execution_premium',
+                       'guaranteed_stop_loss_order_execution_premium': 'guaranteedStopLossOrderExecutionPremium',
+                       }
 
 json_attributes = {'long': 'long', 'short': 'short', 'default': 'default', 'reduce_first': 'reduceFirst',
                    'reduce_only': 'reduceOnly', 'open_only': 'openOnly', 'timestamp': 'timestamp',
@@ -271,4 +278,8 @@ json_attributes = {'long': 'long', 'short': 'short', 'default': 'default', 'redu
                    'guaranteed': 'guaranteed', 'price_range': 'priceRange', 'unix_time': 'unixTime',
                    'guaranteed_stop_loss_order_level_restriction':'guaranteedStopLossOrderLevelRestriction',
                    'requested_units':'requestedUnits', 'full_vwap': 'fullVWAP',
-                   'initial_margin_required':'initialMarginRequired', }
+                   'initial_margin_required':'initialMarginRequired',
+                   'guaranteed_stop_loss_order_mutability': 'guaranteedStopLossOrderMutability',
+                   'minimum_guaranteed_stop_loss_distance': 'minimumGuaranteedStopLossDistance',
+                    'guaranteed_stop_loss_order_execution_premium': 'guaranteedStopLossOrderExecutionPremium',
+                   }

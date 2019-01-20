@@ -2,6 +2,7 @@ import asyncio
 from time import time
 import random
 from async_v20 import OandaClient, LastTransactionID, OrderSpecifier, TransactionID, TradeSpecifier
+from async_v20 import StopLossDetails
 
 loop = asyncio.get_event_loop()
 
@@ -83,7 +84,7 @@ rsp = run(client.create_order('AUD_USD', 10))
 for i in rsp:
     print(i.json())
 
-rsp = run(client.limit_order('AUD_USD', 10, 0.5))
+rsp = run(client.limit_order('AUD_USD',units=10, price=0.5,stop_loss_on_fill=0.4))
 
 for i in rsp:
     print(i.json())
@@ -163,6 +164,7 @@ for response in rsp:
         positions[fill.instrument] += fill.units
 
 print(positions)
+
 print(account.positions._instrument_index)
 print(account.positions._items)
 for instrument, units in positions.items():
@@ -177,5 +179,6 @@ print(run(client.close_all_trades()))
 account = run(client.account())[0]
 
 assert len(account.trades) == 0, f'Account still has trades open {account.trades}'
+
 run(client.close())
 print('TEST SUCCESSFUL!')
