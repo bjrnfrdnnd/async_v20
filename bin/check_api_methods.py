@@ -43,6 +43,7 @@ rsp = run(*[client.create_order('AUD_USD', -11) for _ in range(10)])
 for i in rsp:
     print(i.json())
 
+
 rsp = run(client.list_open_trades())
 
 for i in rsp:

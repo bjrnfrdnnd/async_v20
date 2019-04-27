@@ -32,7 +32,6 @@ class Specifier(object):
     pass
 
 
-
 class DateTime(Primitive):
     """A date and time value using either RFC3339 or UNIX time representation.
     """
@@ -799,6 +798,20 @@ class OrderCancelReason(Reason):
                                                    'Loss Order with a GTD time in the past.',
         'STOP_LOSS_ON_FILL_LOSS': 'Filling the Order would result in the creation of a Stop Loss Order that would have '
                                   'been filled immediately, closing the new Trade at a loss.',
+        'STOP_LOSS_ON_FILL_GUARANTEED_REQUIRED': 'Filling the Order would not result in the creation of a guaranteed '
+                                                 'Stop Loss Order, however the Account’s configuration requires that '
+                                                 'all Trades have a guaranteed Stop Loss Order attached to them.',
+        'STOP_LOSS_ON_FILL_GUARANTEED_NOT_ALLOWED': 'Filling the Order would result in the creation of a guaranteed '
+                                                    'Stop Loss Order, however the Account’s configuration does not '
+                                                    'allow guaranteed Stop Loss Orders.',
+        'STOP_LOSS_ON_FILL_GUARANTEED_MINIMUM_DISTANCE_NOT_MET': 'Filling the Order would result in the creation of a '
+                                                'guaranteed Stop Loss Order with a distance smaller than the '
+                                                'configured mininum distance.',        
+        'STOP_LOSS_ON_FILL_GUARANTEED_LEVEL_RESTRICTION_EXCEEDED': 'Filling the Order would result in the creation of '
+                                                                    'a guaranteed Stop Loss Order with trigger price '
+                                                                    'and number of units that that violates the '
+                                                                    'account’s guaranteed Stop Loss Order level '
+                                                                    'restriction.',
         'TRAILING_STOP_LOSS_ON_FILL_GTD_TIMESTAMP_IN_PAST': 'Filling the Order would have resulted in the creation of '
                                                             'a Trailing Stop Loss Order with a GTD time in the past.',
         'CLIENT_TRADE_ID_ALREADY_EXISTS': 'Filling the Order would result in the creation of a new Open Trade with a '
@@ -1076,6 +1089,15 @@ class TransactionRejectReason(Reason):
         'STOP_LOSS_ON_FILL_PRICE_INVALID': 'The Stop Loss on fill specifies an invalid price',
         'STOP_LOSS_ON_FILL_PRICE_PRECISION_EXCEEDED': 'The Stop Loss on fill specifies a price with more precision '
                                                       'than is allowed by the Order’s instrument',
+        'STOP_LOSS_ON_FILL_GUARANTEED_MINIMUM_DISTANCE_NOT_MET': 'An attempt to create a pending Order was made with '
+                                                                'the distance between the guaranteed Stop Loss Order '
+                                                                'on fill’s price and the pending Order’s price is less '
+                                                                'than the Account’s configured minimum guaranteed stop '
+                                                                'loss distance.',
+        'STOP_LOSS_ON_FILL_GUARANTEED_LEVEL_RESTRICTION_EXCEEDED': 'An attempt to create a pending Order was made with '
+                                                                    'a guaranteed Stop Loss Order on fill configured, '
+                                                                    'and the Order’s units exceed the Account’s configured '
+                                                                    'guaranteed StopLoss Order level restriction volume.',
         'STOP_LOSS_ON_FILL_TIME_IN_FORCE_MISSING': 'The Stop Loss on fill specified does not provide a TimeInForce',
         'STOP_LOSS_ON_FILL_TIME_IN_FORCE_INVALID': 'The Stop Loss on fill specifies an invalid TimeInForce',
         'STOP_LOSS_ON_FILL_GTD_TIMESTAMP_MISSING': 'The Stop Loss on fill specifies a GTD TimeInForce but does not'
@@ -1090,6 +1112,12 @@ class TransactionRejectReason(Reason):
                                                        'TriggerCondition',
         'STOP_LOSS_ON_FILL_TRIGGER_CONDITION_INVALID': 'The Stop Loss on fill specifies an invalid TriggerCondition',
         'TRAILING_STOP_LOSS_ORDER_ALREADY_EXISTS': 'A Trailing Stop Loss Order for the specified Trade already exists',
+        'STOP_LOSS_ORDER_NOT_CANCELABLE': 'An attempt was made to cancel a Stop Loss Order, however the Account’s '
+                                          'configuration requires every Trade have an associated Stop Loss Order.',
+        'STOP_LOSS_ON_FILL_REQUIRED_FOR_PENDING_ORDER': 'An attempt to create a pending Order was made with no '
+                                                        'Stop Loss Order on fill specified and the Account’s '
+                                                        'configuration requires that every Trade have an '
+                                                        'associated Stop Loss Order.',
         'TRAILING_STOP_LOSS_ON_FILL_PRICE_DISTANCE_MISSING': 'The Trailing Stop Loss on fill specified does not '
                                                              'provide a distance',
         'TRAILING_STOP_LOSS_ON_FILL_PRICE_DISTANCE_INVALID': 'The Trailing Stop Loss on fill distance is invalid',
@@ -1203,15 +1231,16 @@ class TransactionType(str, Primitive):
         assert domain_check(value, possible_values=cls.values)
         return super().__new__(cls, value)
 
+
 class GuaranteedStopLossOrderMode(str, Primitive):
     """The overall behaviour of the Account regarding guaranteed Stop Loss Orders
     """
 
     # Valid values
-    values = { 'DISABLED' : 'The Account is not permitted to create guaranteed Stop Loss Orders.',
-               'ALLOWED' : 'The Account is able, but not required to have guaranteed Stop Loss Orders for open Trades.',
-               'REQUIRED' : 'The Account is required to have guaranteed Stop Loss Orders for all open Trades.'
-    }
+    values = {'DISABLED': 'The Account is not permitted to create guaranteed Stop Loss Orders.',
+              'ALLOWED': 'The Account is able, but not required to have guaranteed Stop Loss Orders for open Trades.',
+              'REQUIRED': 'The Account is required to have guaranteed Stop Loss Orders for all open Trades.'
+              }
 
     def __new__(cls, value):
         assert domain_check(value, possible_values=cls.values)

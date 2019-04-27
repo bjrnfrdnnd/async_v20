@@ -983,7 +983,8 @@ class Order(Model):
                  margin_closeout: MarketOrderMarginCloseout = sentinel,
                  delayed_trade_close: MarketOrderDelayedTradeClose = sentinel,
                  trigger_distance: PriceValue = sentinel, is_trigger_distance_exact: bool = sentinel,
-                 guaranteed: bool = sentinel
+                 guaranteed: bool = sentinel,
+                 guaranteed_execution_premium: DecimalNumber = sentinel,
                  ):
         Model.__init__(**locals())
 
@@ -1190,7 +1191,8 @@ class Transaction(Model):
                  partial_fill: str = sentinel,
                  guaranteed: bool = sentinel,
                  requested_units: AccountUnits = sentinel,
-                 full_vwap: DecimalNumber = sentinel):
+                 full_vwap: DecimalNumber = sentinel,
+                 guaranteed_execution_premium: DecimalNumber = sentinel):
         Model.__init__(**locals())
 
 
@@ -1849,7 +1851,8 @@ class OrderCancelTransaction(Transaction, type=TransactionType('ORDER_CANCEL')):
                  account_id: AccountID = sentinel, batch_id: TransactionID = sentinel, request_id: RequestID = sentinel,
                  order_id: OrderID = sentinel, client_order_id: OrderID = sentinel,
                  reason: OrderCancelReason = sentinel, replaced_by_order_id: OrderID = sentinel,
-                 closed_trade_id: OrderID = sentinel, trade_close_transaction_id: TransactionID = sentinel):
+                 closed_trade_id: OrderID = sentinel, trade_close_transaction_id: TransactionID = sentinel,
+                 ):
         Model.__init__(**locals())
 
 
@@ -2344,7 +2347,8 @@ class StopLossOrder(Order, type=OrderType('STOP_LOSS')):
                  trade_reduced_id: TradeID = sentinel,
                  trade_closed_ids: ArrayTradeID = sentinel, cancelling_transaction_id: TransactionID = sentinel,
                  cancelled_time: DateTime = sentinel, replaces_order_id: OrderID = sentinel,
-                 replaced_by_order_id: OrderID = sentinel):
+                 replaced_by_order_id: OrderID = sentinel,
+                 guaranteed_execution_premium: DecimalNumber = sentinel):
         Model.__init__(**locals())
 
 
