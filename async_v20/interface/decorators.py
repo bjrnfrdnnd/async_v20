@@ -47,6 +47,8 @@ def endpoint(endpoint, rest=False, initialize_required=True):
 
             if self.debug:
                 logger.debug('client.session.request(kwargs=%s)', request_kwargs)
+
+            print(request_kwargs)
             response = self.session.request(**request_kwargs)
 
             return await parse_response(self, response, endpoint, enable_rest, method.__name__)

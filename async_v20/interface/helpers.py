@@ -171,11 +171,19 @@ def create_body(self, request_schema, arguments):
                         logger.error(msg)
                         raise InvalidOrderRequest(msg)
 
-                try:
-                    value = value.dict(json=True, datetime_format=self.datetime_format)
-                except AttributeError:
+                if key.lower() =='marginrate':
+                    # for some reason, in case of marginRate, OANDA wants a string and not a number
+                    value = f'{value}'
+                else:
+                    try:
+                        value = value.dict(json=True, datetime_format=self.datetime_format)
+                    except AttributeError:
+                        pass
                     pass
                 yield key, value
+
+    print('erer')
+    print(dict(tuple(dumps())))
 
     return dict(tuple(dumps()))
 
