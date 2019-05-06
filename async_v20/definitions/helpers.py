@@ -45,7 +45,7 @@ def json_to_instance_attributes(self, kwargs, template):
 
 def domain_check(value, example=None, possible_values=None):
     if example:
-        if not len(str(example)) == len(str(value)):
+        if not len(str(value)) in [len(str(example)), len(str(example)) + 1]:
             msg = f'{value} does not match length of example {example}'
             logger.error(msg)
             raise InvalidValue(msg)
