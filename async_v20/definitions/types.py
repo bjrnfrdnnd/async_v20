@@ -504,8 +504,9 @@ class PositionSide(Model):
                  trade_ids: ArrayTradeID = sentinel,
                  pl: AccountUnits = sentinel, unrealized_pl: AccountUnits = sentinel,
                  resettable_pl: AccountUnits = sentinel,
-                 financing: DecimalNumber = sentinel,
-                 guaranteed_execution_fees: AccountUnits = sentinel):
+                 financing: AccountUnits = sentinel,
+                 guaranteed_execution_fees: AccountUnits = sentinel,
+                 dividend: AccountUnits = sentinel):
         Model.__init__(**locals())
 
 
@@ -536,9 +537,10 @@ class Position(Model):
                  unrealized_pl: AccountUnits = sentinel,
                  resettable_pl: AccountUnits = sentinel, commission: AccountUnits = sentinel,
                  long: PositionSide = sentinel,
-                 short: PositionSide = sentinel, financing: DecimalNumber = sentinel,
+                 short: PositionSide = sentinel, financing: AccountUnits = sentinel,
                  margin_used: AccountUnits = sentinel,
-                 guaranteed_execution_fees: AccountUnits = sentinel):
+                 guaranteed_execution_fees: AccountUnits = sentinel,
+                 dividend: AccountUnits = sentinel):
         Model.__init__(**locals())
 
 
@@ -3042,6 +3044,7 @@ class Account(AccountSummary):
                  resettable_pl_time: DateTime = sentinel,
                  guaranteed_execution_fees: AccountUnits = sentinel,
                  guaranteed_stop_loss_order_mutability: str = sentinel,
+                 dividend: DecimalNumber=sentinel,
                  ):
         Model.__init__(**locals())
 

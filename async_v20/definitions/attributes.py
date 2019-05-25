@@ -187,6 +187,7 @@ instance_attributes = {'long': 'long', 'short': 'short', 'default': 'default', '
                        'minimum_guaranteed_stop_loss_distance': 'minimum_guaranteed_stop_loss_distance',
                        'guaranteedStopLossOrderExecutionPremium': 'guaranteed_stop_loss_order_execution_premium',
                        'guaranteed_stop_loss_order_execution_premium': 'guaranteedStopLossOrderExecutionPremium',
+                       'dividend': 'dividend'
                        }
 
 json_attributes = {'long': 'long', 'short': 'short', 'default': 'default', 'reduce_first': 'reduceFirst',
@@ -287,4 +288,5 @@ json_attributes = {'long': 'long', 'short': 'short', 'default': 'default', 'redu
                    'guaranteed_stop_loss_order_mutability': 'guaranteedStopLossOrderMutability',
                    'minimum_guaranteed_stop_loss_distance': 'minimumGuaranteedStopLossDistance',
                     'guaranteed_stop_loss_order_execution_premium': 'guaranteedStopLossOrderExecutionPremium',
+                   'dividend': 'dividend'
                    }
