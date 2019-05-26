@@ -2079,7 +2079,7 @@ class AccountSummary(Model):
                  resettable_pl_time: DateTime = sentinel,
                  guaranteed_execution_fees: AccountUnits = sentinel,
                  guaranteed_stop_loss_order_mutability: str = sentinel,
-                 ):
+                 dividend: AccountUnits = sentinel):
         Model.__init__(**locals())
 
 
