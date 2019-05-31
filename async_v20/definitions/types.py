@@ -1123,7 +1123,8 @@ class TradeSummary(Model):
                  financing: AccountUnits = sentinel, close_time: DateTime = sentinel,
                  client_extensions: ClientExtensions = sentinel, take_profit_order_id: OrderID = sentinel,
                  stop_loss_order_id: OrderID = sentinel, trailing_stop_loss_order_id: OrderID = sentinel,
-                 margin_used: AccountUnits = sentinel):
+                 margin_used: AccountUnits = sentinel,
+                 dividend: AccountUnits = sentinel):
         Model.__init__(**locals())
 
 
