@@ -221,7 +221,7 @@ class Model(object, metaclass=Metaclass):
               of :class:`~async_v20.definitions.primitives.DataTime` objects"""
         return json.dumps(self.dict(json=True, datetime_format=datetime_format))
 
-    def data(self, json=False, datetime_format=None, delimiter=None):
+    def data(self, json=False, datetime_format=None, delimiter=None, flatten=True):
         """Return the a flattened dictionary representation of the object
 
         Args:
@@ -233,7 +233,10 @@ class Model(object, metaclass=Metaclass):
         """
         if delimiter is None:
             delimiter = self._delimiter
-        return flatten_dict(self.dict(json=json, datetime_format=datetime_format), delimiter)
+        if flatten:
+            return flatten_dict(self.dict(json=json, datetime_format=datetime_format), delimiter)
+        else:
+            return self.dict(json=json, datetime_format=datetime_format)
 
     def series(self, json=False, datetime_format=None, delimiter=None):
         """Return a :class:`pandas.Series` representation of the object
@@ -455,7 +458,7 @@ class Array(object):
             pass
         return default
 
-    def dataframe(self, json=False, datetime_format=None):
+    def dataframe(self, json=False, datetime_format=None, flatten=True):
         """Create a pandas.Dataframe
 
         Args:
@@ -464,7 +467,7 @@ class Array(object):
 
             datetime_format: 'UNIX' or 'RFC3339'
         """
-        return pd.DataFrame(obj.data(json=json, datetime_format=datetime_format) for obj in self)
+        return pd.DataFrame(obj.data(json=json, datetime_format=datetime_format, flatten=flatten) for obj in self)
 
 
 def create_attribute(typ, data):
