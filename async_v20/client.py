@@ -19,6 +19,8 @@ from .interface.helpers import too_many_passed_transactions
 logger = logging.getLogger(__name__)
 
 
+
+
 async def sleep(s=0.0):
     await asyncio.sleep(s)
 
@@ -305,8 +307,8 @@ class OandaClient(AccountInterface, InstrumentInterface, OrderInterface, Positio
                         if service.current_event.status.name != 'Up':
                             logger.warning(f'{service.name} {service.current_event.message}')
                 else:
-                    logging.warning('Server did not return available services')
-                    print(response.json())
+                    logger.warning('Server did not return available services; response is None')
+
 
                 # Get the first account listed in in accounts.
                 # If another is desired the account must be configured

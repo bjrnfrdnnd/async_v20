@@ -11,7 +11,8 @@ from ..endpoints.annotations import SinceTransactionID
 from ..endpoints.other_responses import other_responses
 from ..endpoints.pricing import GETPricingStream
 from ..endpoints.transaction import GETTransactionsStream
-from ..exceptions import ResponseTimeout, UnexpectedStatus
+from ..exceptions import ResponseTimeout, UnexpectedStatus, URLDoesNotExistError
+import aiohttp.client_exceptions
 
 from time import time
 
@@ -58,13 +59,19 @@ async def _rest_response(self, response, endpoint, enable_rest, method_name):
         async with timeout(self.rest_timeout):
             async with response as resp:
                 schema, status, boolean = _lookup_schema(endpoint, resp.status)
-                # Update client headers.
-                self.default_parameters.update(resp.raw_headers)
-                json_body = await resp.json()
+                if status == 404:
+                    # requested url does not exist
+                    msg = f'requested url does not exist; status returned is 404; url: {resp.url}'
+                    logger.warning(msg)
+                    raise URLDoesNotExistError
+                else:
+                    # Update client headers.
+                    self.default_parameters.update(resp.raw_headers)
+                    json_body = await resp.json()
 
     except AsyncTimeOutError:
         msg = f'{method_name} took longer than {self.rest_timeout} seconds'
-        logger.error(msg)
+        logger.warning(msg)
         raise ResponseTimeout(msg)
     else:
         response = await _create_response(json_body, endpoint, schema, status, boolean, self.datetime_format)
@@ -128,7 +135,12 @@ async def _stream_parser(self, response, endpoint, method_name):
 
 async def parse_response(self, response, endpoint, enable_rest, method_name):
     if endpoint.host in 'REST HEALTH':
-        result = await _rest_response(self, response, endpoint, enable_rest, method_name)
+        try:
+            result = await _rest_response(self, response, endpoint, enable_rest, method_name)
+        except URLDoesNotExistError:
+            result = None
+            logger.warning(f"Querying the Health API using path :{endpoint.path} failed")
+            result = None
     else:
         result = _stream_parser(self, response, endpoint, method_name)
     return result

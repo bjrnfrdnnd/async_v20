@@ -14,6 +14,10 @@ class ResponseTimeout(AsyncV20Exception):
     """The server took to long to respond"""
     pass
 
+class URLDoesNotExistError(AsyncV20Exception):
+    """The requested url does not exist (status 404 was returned)"""
+    pass
+
 class CloseAllTradesFailure(AsyncV20Exception):
     """Failed to close all trades"""
     pass
