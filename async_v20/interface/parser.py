@@ -96,7 +96,6 @@ async def _rest_response(self, response, endpoint, enable_rest, method_name):
 
     return response
 
-
 def _construct_json_body_and_schema(line, schema, endpoint):
     """This helper function standardises the streaming responses"""
     try:
