@@ -25,7 +25,12 @@ Documentation
 http://async-v20.readthedocs.io/
 
 Disclaimer (BN)
-----------------
+---------------
+A fork of the excellent 'async-v20 https://github.com/jamespeterschinner/async_v20'.
+As OANDA is changing its API a bit and does not well document it, the original version of async-v20 is
+not fully functional at the moment.
+This fork is a bit updated, allowing some additional keyword arguments and JSON structures that OANDA sends
+and/or requests.
 
 
 Disclaimer
