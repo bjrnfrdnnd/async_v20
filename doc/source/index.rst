@@ -20,6 +20,10 @@ async_v20: Asynchronous OANDA v20 client
   :target: http://async-v20.readthedocs.io/en/latest/?badge=latest
   :alt: Documentation Status
 
+Disclaimer (by BN)
+------------------
+This is a fork of the excellent package  async_v20
+
 Disclaimer
 ----------
 
