@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Positions &#8212; async_v20 8.0.0b1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pricing" href="pricing.html" />
+    <link rel="prev" title="Order" href="order.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="positions">
+<span id="position-types"></span><h1>Positions<a class="headerlink" href="#positions" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="async_v20.Position">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.</code><code class="sig-name descname">Position</code><span class="sig-paren">(</span><em class="sig-param">instrument: InstrumentName= sentinel</em>, <em class="sig-param">pl: AccountUnits= sentinel</em>, <em class="sig-param">unrealized_pl: AccountUnits= sentinel</em>, <em class="sig-param">resettable_pl: AccountUnits= sentinel</em>, <em class="sig-param">commission: AccountUnits= sentinel</em>, <em class="sig-param">long: PositionSide= sentinel</em>, <em class="sig-param">short: PositionSide= sentinel</em>, <em class="sig-param">financing: AccountUnits= sentinel</em>, <em class="sig-param">margin_used: AccountUnits= sentinel</em>, <em class="sig-param">guaranteed_execution_fees: AccountUnits= sentinel</em>, <em class="sig-param">dividend: AccountUnits= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/async_v20/definitions/types.html#Position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.Position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.base.Model</span></code></p>
+<p>The specification of a Position within an Account.</p>
+<dl class="attribute">
+<dt id="async_v20.Position.instrument">
+<code class="sig-name descname">instrument</code><a class="headerlink" href="#async_v20.Position.instrument" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.InstrumentName" title="async_v20.InstrumentName"><code class="xref py py-class docutils literal notranslate"><span class="pre">InstrumentName</span></code></a>
+The Position’s Instrument.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Position.pl">
+<code class="sig-name descname">pl</code><a class="headerlink" href="#async_v20.Position.pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+Profit/loss realized by the Position over the lifetime of the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Position.unrealized_pl">
+<code class="sig-name descname">unrealized_pl</code><a class="headerlink" href="#async_v20.Position.unrealized_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The unrealized profit/loss of all open Trades that contribute to this Position.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Position.resettable_pl">
+<code class="sig-name descname">resettable_pl</code><a class="headerlink" href="#async_v20.Position.resettable_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+Profit/loss realized by the Position since the
+Account’s resettablePL was last reset by the client.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Position.commission">
+<code class="sig-name descname">commission</code><a class="headerlink" href="#async_v20.Position.commission" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The total amount of commission paid for this instrument over
+the lifetime of the Account. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Position.long">
+<code class="sig-name descname">long</code><a class="headerlink" href="#async_v20.Position.long" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#async_v20.PositionSide" title="async_v20.PositionSide"><code class="xref py py-class docutils literal notranslate"><span class="pre">PositionSide</span></code></a>
+The details of the long side of the Position.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Position.short">
+<code class="sig-name descname">short</code><a class="headerlink" href="#async_v20.Position.short" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#async_v20.PositionSide" title="async_v20.PositionSide"><code class="xref py py-class docutils literal notranslate"><span class="pre">PositionSide</span></code></a>
+The details of the short side of the Position.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.PositionSide">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.</code><code class="sig-name descname">PositionSide</code><span class="sig-paren">(</span><em class="sig-param">units: DecimalNumber= sentinel</em>, <em class="sig-param">average_price: PriceValue= sentinel</em>, <em class="sig-param">trade_ids: ArrayTradeID= sentinel</em>, <em class="sig-param">pl: AccountUnits= sentinel</em>, <em class="sig-param">unrealized_pl: AccountUnits= sentinel</em>, <em class="sig-param">resettable_pl: AccountUnits= sentinel</em>, <em class="sig-param">financing: AccountUnits= sentinel</em>, <em class="sig-param">guaranteed_execution_fees: AccountUnits= sentinel</em>, <em class="sig-param">dividend: AccountUnits= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/async_v20/definitions/types.html#PositionSide"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.PositionSide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.base.Model</span></code></p>
+<p>The representation of a Position for a single direction (long or short).</p>
+<dl class="attribute">
+<dt id="async_v20.PositionSide.units">
+<code class="sig-name descname">units</code><a class="headerlink" href="#async_v20.PositionSide.units" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+Number of units in the position (negative
+value indicates short position, positive indicates long position).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.PositionSide.average_price">
+<code class="sig-name descname">average_price</code><a class="headerlink" href="#async_v20.PositionSide.average_price" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.PriceValue" title="async_v20.PriceValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">PriceValue</span></code></a>
+Volume-weighted average of the underlying Trade open prices for the Position.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.PositionSide.trade_ids">
+<code class="sig-name descname">trade_ids</code><a class="headerlink" href="#async_v20.PositionSide.trade_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="../primitives.html#async_v20.TradeID" title="async_v20.TradeID"><code class="xref py py-class docutils literal notranslate"><span class="pre">TradeID</span></code></a>, …),
+List of the open Trade IDs which contribute to the open Position.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.PositionSide.pl">
+<code class="sig-name descname">pl</code><a class="headerlink" href="#async_v20.PositionSide.pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+Profit/loss realized by the PositionSide over the lifetime of the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.PositionSide.unrealized_pl">
+<code class="sig-name descname">unrealized_pl</code><a class="headerlink" href="#async_v20.PositionSide.unrealized_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The unrealized profit/loss of all open
+Trades that contribute to this PositionSide.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.PositionSide.resettable_pl">
+<code class="sig-name descname">resettable_pl</code><a class="headerlink" href="#async_v20.PositionSide.resettable_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+Profit/loss realized by the PositionSide since the
+Account’s resettablePL was last reset by the client.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.CalculatedPositionState">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.</code><code class="sig-name descname">CalculatedPositionState</code><span class="sig-paren">(</span><em class="sig-param">instrument: InstrumentName= sentinel</em>, <em class="sig-param">net_unrealized_pl: AccountUnits= sentinel</em>, <em class="sig-param">long_unrealized_pl: AccountUnits= sentinel</em>, <em class="sig-param">short_unrealized_pl: AccountUnits= sentinel</em>, <em class="sig-param">margin_used: AccountUnits= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/async_v20/definitions/types.html#CalculatedPositionState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.CalculatedPositionState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.base.Model</span></code></p>
+<p>The dynamic (calculated) state of a Position</p>
+<dl class="attribute">
+<dt id="async_v20.CalculatedPositionState.instrument">
+<code class="sig-name descname">instrument</code><a class="headerlink" href="#async_v20.CalculatedPositionState.instrument" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.InstrumentName" title="async_v20.InstrumentName"><code class="xref py py-class docutils literal notranslate"><span class="pre">InstrumentName</span></code></a>
+The Position’s Instrument.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.CalculatedPositionState.net_unrealized_pl">
+<code class="sig-name descname">net_unrealized_pl</code><a class="headerlink" href="#async_v20.CalculatedPositionState.net_unrealized_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The Position’s net unrealized profit/loss</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.CalculatedPositionState.long_unrealized_pl">
+<code class="sig-name descname">long_unrealized_pl</code><a class="headerlink" href="#async_v20.CalculatedPositionState.long_unrealized_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The unrealized profit/loss of the Position’s long open Trades</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.CalculatedPositionState.short_unrealized_pl">
+<code class="sig-name descname">short_unrealized_pl</code><a class="headerlink" href="#async_v20.CalculatedPositionState.short_unrealized_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The unrealized profit/loss of the Position’s short open Trades</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.CalculatedPositionState.Margin_used">
+<code class="sig-name descname">Margin_used</code><a class="headerlink" href="#async_v20.CalculatedPositionState.Margin_used" title="Permalink to this definition">¶</a></dt>
+<dd><p>Margin currently used by the Position</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">async_v20</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../beyond_getting_started.html">Beyond Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../order_request_formatting.html">Formatting Order Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetimes.html">Dealing With Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../health.html">Health API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../traps.html">Traps for young players</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">OandaClient API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../response.html">The Response Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../particularly_pertinent.html">Particularly Pertinent Programming Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../types.html">Class Definitions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="account.html">Account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument.html">Instrument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="order.html">Order</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pricing.html">Pricing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trade.html">Trade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transaction.html">Transaction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../annotations.html">Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html#warnings">Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../types.html">Class Definitions</a><ul>
+      <li>Previous: <a href="order.html" title="previous chapter">Order</a></li>
+      <li>Next: <a href="pricing.html" title="next chapter">Pricing</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, James Peter Schinner.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/definitions/positions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

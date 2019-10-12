@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Account &#8212; async_v20 8.0.0b1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Instrument" href="instrument.html" />
+    <link rel="prev" title="Class Definitions" href="../types.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="account">
+<span id="account-types"></span><h1>Account<a class="headerlink" href="#account" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="async_v20.AccountProperties">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.</code><code class="sig-name descname">AccountProperties</code><span class="sig-paren">(</span><em class="sig-param">id: AccountID= sentinel</em>, <em class="sig-param">mt4_account_id: int= sentinel</em>, <em class="sig-param">tags: ArrayStr= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/async_v20/definitions/types.html#AccountProperties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.AccountProperties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.base.Model</span></code></p>
+<p>Properties related to an Account.</p>
+<dl class="attribute">
+<dt id="async_v20.AccountProperties.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#async_v20.AccountProperties.id" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountID" title="async_v20.AccountID"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountID</span></code></a>
+The Account’s identifier</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountProperties.mt4account_id">
+<code class="sig-name descname">mt4account_id</code><a class="headerlink" href="#async_v20.AccountProperties.mt4account_id" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountID" title="async_v20.AccountID"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountID</span></code></a>
+The Account’s associated MT4 Account ID. This field will not
+be present if the Account is not an MT4 account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountProperties.tags">
+<code class="sig-name descname">tags</code><a class="headerlink" href="#async_v20.AccountProperties.tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, …)
+The Account’s tags</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.AccountChangesState">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.</code><code class="sig-name descname">AccountChangesState</code><span class="sig-paren">(</span><em class="sig-param">unrealized_pl: AccountUnits= sentinel</em>, <em class="sig-param">nav: AccountUnits= sentinel</em>, <em class="sig-param">margin_used: AccountUnits= sentinel</em>, <em class="sig-param">margin_available: AccountUnits= sentinel</em>, <em class="sig-param">position_value: AccountUnits= sentinel</em>, <em class="sig-param">margin_closeout_unrealized_pl: AccountUnits= sentinel</em>, <em class="sig-param">margin_closeout_nav: AccountUnits= sentinel</em>, <em class="sig-param">margin_closeout_margin_used: AccountUnits= sentinel</em>, <em class="sig-param">margin_closeout_percent: DecimalNumber= sentinel</em>, <em class="sig-param">margin_closeout_position_value: DecimalNumber= sentinel</em>, <em class="sig-param">withdrawal_limit: AccountUnits= sentinel</em>, <em class="sig-param">margin_call_margin_used: AccountUnits= sentinel</em>, <em class="sig-param">margin_call_percent: DecimalNumber= sentinel</em>, <em class="sig-param">orders: ArrayDynamicOrderState= sentinel</em>, <em class="sig-param">trades: ArrayCalculatedTradeState= sentinel</em>, <em class="sig-param">positions: ArrayCalculatedPositionState= sentinel</em>, <em class="sig-param">balance: AccountUnits= sentinel</em>, <em class="sig-param">pl: AccountUnits= sentinel</em>, <em class="sig-param">resettable_pl: AccountUnits= sentinel</em>, <em class="sig-param">commission: AccountUnits= sentinel</em>, <em class="sig-param">guaranteed_execution_fees: AccountUnits= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/async_v20/definitions/types.html#AccountChangesState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.AccountChangesState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.base.Model</span></code></p>
+<p>An AccountState Object is used to represent an Account’s current price-
+dependent state. Price-dependent Account state is dependent on OANDA’s
+current Prices, and includes things like unrealized PL, NAV and Trailing
+Stop Loss Order state.</p>
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.unrealized_pl">
+<code class="sig-name descname">unrealized_pl</code><a class="headerlink" href="#async_v20.AccountChangesState.unrealized_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The total unrealized profit/loss for all Trades currently open
+in the Account. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.nav">
+<code class="sig-name descname">nav</code><a class="headerlink" href="#async_v20.AccountChangesState.nav" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The net asset value of the Account. Equal to
+Account balance + unrealizedPL. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.margin_used">
+<code class="sig-name descname">margin_used</code><a class="headerlink" href="#async_v20.AccountChangesState.margin_used" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+Margin currently used for the Account.
+Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.margin_available">
+<code class="sig-name descname">margin_available</code><a class="headerlink" href="#async_v20.AccountChangesState.margin_available" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+Margin available for Account. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.position_value">
+<code class="sig-name descname">position_value</code><a class="headerlink" href="#async_v20.AccountChangesState.position_value" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The value of the Account’s open
+positions represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.margin_closeout_unrealized_pl">
+<code class="sig-name descname">margin_closeout_unrealized_pl</code><a class="headerlink" href="#async_v20.AccountChangesState.margin_closeout_unrealized_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The Account’s margin closeout unrealized PL.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.margin_closeout_nav">
+<code class="sig-name descname">margin_closeout_nav</code><a class="headerlink" href="#async_v20.AccountChangesState.margin_closeout_nav" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The Account’s margin closeout NAV.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.margin_closeout_margin_used">
+<code class="sig-name descname">margin_closeout_margin_used</code><a class="headerlink" href="#async_v20.AccountChangesState.margin_closeout_margin_used" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The Account’s margin closeout margin used.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.margin_closeout_percent">
+<code class="sig-name descname">margin_closeout_percent</code><a class="headerlink" href="#async_v20.AccountChangesState.margin_closeout_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+The Account’s margin closeout percentage. When this value is 1.0
+or above the Account is in a margin closeout situation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.margin_closeout_position_value">
+<code class="sig-name descname">margin_closeout_position_value</code><a class="headerlink" href="#async_v20.AccountChangesState.margin_closeout_position_value" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+The value of the Account’s open positions as used
+for margin closeout calculations represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.withdrawal_limit">
+<code class="sig-name descname">withdrawal_limit</code><a class="headerlink" href="#async_v20.AccountChangesState.withdrawal_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The current WithdrawalLimit for the account which will be zero or
+a positive value indicating how much can be withdrawn from the account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.margin_call_margin_used">
+<code class="sig-name descname">margin_call_margin_used</code><a class="headerlink" href="#async_v20.AccountChangesState.margin_call_margin_used" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The Account’s margin call margin used.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.margin_call_percent">
+<code class="sig-name descname">margin_call_percent</code><a class="headerlink" href="#async_v20.AccountChangesState.margin_call_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+The Account’s margin call percentage. When this value is 1.0
+or above the Account is in a margin call situation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.orders">
+<code class="sig-name descname">orders</code><a class="headerlink" href="#async_v20.AccountChangesState.orders" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="order.html#async_v20.DynamicOrderState" title="async_v20.DynamicOrderState"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicOrderState</span></code></a>, …)
+The price-dependent state of each pending Order in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.trades">
+<code class="sig-name descname">trades</code><a class="headerlink" href="#async_v20.AccountChangesState.trades" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="trade.html#async_v20.CalculatedTradeState" title="async_v20.CalculatedTradeState"><code class="xref py py-class docutils literal notranslate"><span class="pre">CalculatedTradeState</span></code></a>, …)
+The price-dependent state for each open Trade in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChangesState.positions">
+<code class="sig-name descname">positions</code><a class="headerlink" href="#async_v20.AccountChangesState.positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="positions.html#async_v20.CalculatedPositionState" title="async_v20.CalculatedPositionState"><code class="xref py py-class docutils literal notranslate"><span class="pre">CalculatedPositionState</span></code></a>, ..)
+The price-dependent state for each open Position in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname"># TODO add documentation for Pl and resettabel_pl</code></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.AccountSummary">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.</code><code class="sig-name descname">AccountSummary</code><span class="sig-paren">(</span><em class="sig-param">id: AccountID= sentinel</em>, <em class="sig-param">alias: str= sentinel</em>, <em class="sig-param">currency: Currency= sentinel</em>, <em class="sig-param">balance: AccountUnits= sentinel</em>, <em class="sig-param">created_by_user_id: int= sentinel</em>, <em class="sig-param">created_time: DateTime= sentinel</em>, <em class="sig-param">pl: AccountUnits= sentinel</em>, <em class="sig-param">resettable_pl: AccountUnits= sentinel</em>, <em class="sig-param">resettabled_pl_time: DateTime= sentinel</em>, <em class="sig-param">commission: AccountUnits= sentinel</em>, <em class="sig-param">margin_rate: DecimalNumber= sentinel</em>, <em class="sig-param">margin_call_enter_time: DateTime= sentinel</em>, <em class="sig-param">margin_call_extension_count: int= sentinel</em>, <em class="sig-param">last_margin_call_extension_time: DateTime= sentinel</em>, <em class="sig-param">open_trade_count: int= sentinel</em>, <em class="sig-param">open_position_count: int= sentinel</em>, <em class="sig-param">pending_order_count: int= sentinel</em>, <em class="sig-param">hedging_enabled: bool= sentinel</em>, <em class="sig-param">unrealized_pl: AccountUnits= sentinel</em>, <em class="sig-param">nav: AccountUnits= sentinel</em>, <em class="sig-param">margin_used: AccountUnits= sentinel</em>, <em class="sig-param">margin_available: AccountUnits= sentinel</em>, <em class="sig-param">position_value: AccountUnits= sentinel</em>, <em class="sig-param">margin_closeout_unrealized_pl: AccountUnits= sentinel</em>, <em class="sig-param">margin_closeout_nav: AccountUnits= sentinel</em>, <em class="sig-param">margin_closeout_margin_used: AccountUnits= sentinel</em>, <em class="sig-param">margin_closeout_percent: DecimalNumber= sentinel</em>, <em class="sig-param">margin_closeout_position_value: DecimalNumber= sentinel</em>, <em class="sig-param">withdrawal_limit: AccountUnits= sentinel</em>, <em class="sig-param">margin_call_margin_used: AccountUnits= sentinel</em>, <em class="sig-param">margin_call_percent: DecimalNumber= sentinel</em>, <em class="sig-param">last_transaction_id: TransactionID= sentinel</em>, <em class="sig-param">trades: ArrayTradeSummary= sentinel</em>, <em class="sig-param">positions: ArrayPosition= sentinel</em>, <em class="sig-param">orders: ArrayOrder= sentinel</em>, <em class="sig-param">financing: DecimalNumber= sentinel</em>, <em class="sig-param">guaranteed_stop_loss_order_mode: GuaranteedStopLossOrderMode= sentinel</em>, <em class="sig-param">resettable_pl_time: DateTime= sentinel</em>, <em class="sig-param">guaranteed_execution_fees: AccountUnits= sentinel</em>, <em class="sig-param">guaranteed_stop_loss_order_mutability: str= sentinel</em>, <em class="sig-param">dividend: AccountUnits= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/async_v20/definitions/types.html#AccountSummary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.AccountSummary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.base.Model</span></code></p>
+<p>A summary representation of a client’s Account. The AccountSummary does not
+provide to full specification of pending Orders, open Trades and Positions.</p>
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#async_v20.AccountSummary.id" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountID" title="async_v20.AccountID"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountID</span></code></a>
+The Account’s identifier</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.alias">
+<code class="sig-name descname">alias</code><a class="headerlink" href="#async_v20.AccountSummary.alias" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>
+Client-assigned alias for the Account. Only provided
+if the Account has an alias set</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.currency">
+<code class="sig-name descname">currency</code><a class="headerlink" href="#async_v20.AccountSummary.currency" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.Currency" title="async_v20.Currency"><code class="xref py py-class docutils literal notranslate"><span class="pre">Currency</span></code></a>
+The home currency of the Account</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.balance">
+<code class="sig-name descname">balance</code><a class="headerlink" href="#async_v20.AccountSummary.balance" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The current balance of the Account. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.created_by_user_id">
+<code class="sig-name descname">created_by_user_id</code><a class="headerlink" href="#async_v20.AccountSummary.created_by_user_id" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+ID of the user that created the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.created_time">
+<code class="sig-name descname">created_time</code><a class="headerlink" href="#async_v20.AccountSummary.created_time" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DateTime" title="async_v20.DateTime"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTime</span></code></a>
+The date/time when the Account was created.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.pl">
+<code class="sig-name descname">pl</code><a class="headerlink" href="#async_v20.AccountSummary.pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The total profit/loss realized over the lifetime of
+the Account. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.resettable_pl">
+<code class="sig-name descname">resettable_pl</code><a class="headerlink" href="#async_v20.AccountSummary.resettable_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The total realized profit/loss for the Account since it was
+last reset by the client. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.resettabled_pl_time">
+<code class="sig-name descname">resettabled_pl_time</code><a class="headerlink" href="#async_v20.AccountSummary.resettabled_pl_time" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DateTime" title="async_v20.DateTime"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTime</span></code></a>
+The date/time that the Account’s resettablePL was last reset.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.commission">
+<code class="sig-name descname">commission</code><a class="headerlink" href="#async_v20.AccountSummary.commission" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The total amount of commission paid over the lifetime
+of the Account. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.margin_rate">
+<code class="sig-name descname">margin_rate</code><a class="headerlink" href="#async_v20.AccountSummary.margin_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+Client-provided margin rate override for the Account.
+The effective margin rate of the Account is the lesser of this
+value and the OANDA margin rate for the Account’s division.
+This value is only provided if a margin rate override
+exists for the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.margin_call_enter_time">
+<code class="sig-name descname">margin_call_enter_time</code><a class="headerlink" href="#async_v20.AccountSummary.margin_call_enter_time" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DateTime" title="async_v20.DateTime"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTime</span></code></a>
+The date/time when the Account entered a margin call state.
+Only provided if the Account is in a margin call.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.margin_call_extension_count">
+<code class="sig-name descname">margin_call_extension_count</code><a class="headerlink" href="#async_v20.AccountSummary.margin_call_extension_count" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+The number of times that the Account’s current margin call was extended.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.last_margin_call_extension_time">
+<code class="sig-name descname">last_margin_call_extension_time</code><a class="headerlink" href="#async_v20.AccountSummary.last_margin_call_extension_time" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DateTime" title="async_v20.DateTime"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTime</span></code></a>
+The date/time of the Account’s last margin call extension.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.open_trade_count">
+<code class="sig-name descname">open_trade_count</code><a class="headerlink" href="#async_v20.AccountSummary.open_trade_count" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+The number of Trades currently open in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.open_position_count">
+<code class="sig-name descname">open_position_count</code><a class="headerlink" href="#async_v20.AccountSummary.open_position_count" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+The number of Positions currently open in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.pending_order_count">
+<code class="sig-name descname">pending_order_count</code><a class="headerlink" href="#async_v20.AccountSummary.pending_order_count" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+The number of Orders currently pending in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.hedging_enabled">
+<code class="sig-name descname">hedging_enabled</code><a class="headerlink" href="#async_v20.AccountSummary.hedging_enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>
+Flag indicating that the Account has hedging enabled.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.unrealized_pl">
+<code class="sig-name descname">unrealized_pl</code><a class="headerlink" href="#async_v20.AccountSummary.unrealized_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The total unrealized profit/loss for all Trades currently open
+in the Account. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.nav">
+<code class="sig-name descname">nav</code><a class="headerlink" href="#async_v20.AccountSummary.nav" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The net asset value of the Account. Equal to
+Account balance + unrealizedPL. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.margin_used">
+<code class="sig-name descname">margin_used</code><a class="headerlink" href="#async_v20.AccountSummary.margin_used" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+Margin currently used for the Account.
+Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.margin_available">
+<code class="sig-name descname">margin_available</code><a class="headerlink" href="#async_v20.AccountSummary.margin_available" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+Margin available for Account. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.position_value">
+<code class="sig-name descname">position_value</code><a class="headerlink" href="#async_v20.AccountSummary.position_value" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The value of the Account’s open
+positions represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.margin_closeout_unrealized_pl">
+<code class="sig-name descname">margin_closeout_unrealized_pl</code><a class="headerlink" href="#async_v20.AccountSummary.margin_closeout_unrealized_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The Account’s margin closeout unrealized PL.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.margin_closeout_nav">
+<code class="sig-name descname">margin_closeout_nav</code><a class="headerlink" href="#async_v20.AccountSummary.margin_closeout_nav" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The Account’s margin closeout NAV.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.margin_closeout_margin_used">
+<code class="sig-name descname">margin_closeout_margin_used</code><a class="headerlink" href="#async_v20.AccountSummary.margin_closeout_margin_used" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The Account’s margin closeout margin used.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.margin_closeout_percent">
+<code class="sig-name descname">margin_closeout_percent</code><a class="headerlink" href="#async_v20.AccountSummary.margin_closeout_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+The Account’s margin closeout percentage. When this value is 1.0
+or above the Account is in a margin closeout situation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.margin_closeout_position_value">
+<code class="sig-name descname">margin_closeout_position_value</code><a class="headerlink" href="#async_v20.AccountSummary.margin_closeout_position_value" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+The value of the Account’s open positions as used
+for margin closeout calculations represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.withdrawal_limit">
+<code class="sig-name descname">withdrawal_limit</code><a class="headerlink" href="#async_v20.AccountSummary.withdrawal_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The current WithdrawalLimit for the account which will be zero or
+a positive value indicating how much can be withdrawn from the account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.margin_call_margin_used">
+<code class="sig-name descname">margin_call_margin_used</code><a class="headerlink" href="#async_v20.AccountSummary.margin_call_margin_used" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The Account’s margin call margin used.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.margin_call_percent">
+<code class="sig-name descname">margin_call_percent</code><a class="headerlink" href="#async_v20.AccountSummary.margin_call_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+The Account’s margin call percentage. When this value is 1.0
+or above the Account is in a margin call situation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountSummary.last_transaction_id">
+<code class="sig-name descname">last_transaction_id</code><a class="headerlink" href="#async_v20.AccountSummary.last_transaction_id" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.TransactionID" title="async_v20.TransactionID"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransactionID</span></code></a>
+The ID of the last Transaction created for the Account.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.Account">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.</code><code class="sig-name descname">Account</code><span class="sig-paren">(</span><em class="sig-param">id: AccountID= sentinel</em>, <em class="sig-param">alias: str= sentinel</em>, <em class="sig-param">currency: Currency= sentinel</em>, <em class="sig-param">balance: AccountUnits= sentinel</em>, <em class="sig-param">created_by_user_id: int= sentinel</em>, <em class="sig-param">created_time: DateTime= sentinel</em>, <em class="sig-param">pl: AccountUnits= sentinel</em>, <em class="sig-param">resettable_pl: AccountUnits= sentinel</em>, <em class="sig-param">resettabled_pl_time: DateTime= sentinel</em>, <em class="sig-param">commission: AccountUnits= sentinel</em>, <em class="sig-param">margin_rate: DecimalNumber= sentinel</em>, <em class="sig-param">margin_call_enter_time: DateTime= sentinel</em>, <em class="sig-param">margin_call_extension_count: int= sentinel</em>, <em class="sig-param">last_margin_call_extension_time: DateTime= sentinel</em>, <em class="sig-param">open_trade_count: int= sentinel</em>, <em class="sig-param">open_position_count: int= sentinel</em>, <em class="sig-param">pending_order_count: int= sentinel</em>, <em class="sig-param">hedging_enabled: bool= sentinel</em>, <em class="sig-param">unrealized_pl: AccountUnits= sentinel</em>, <em class="sig-param">nav: AccountUnits= sentinel</em>, <em class="sig-param">margin_used: AccountUnits= sentinel</em>, <em class="sig-param">margin_available: AccountUnits= sentinel</em>, <em class="sig-param">position_value: AccountUnits= sentinel</em>, <em class="sig-param">margin_closeout_unrealized_pl: AccountUnits= sentinel</em>, <em class="sig-param">margin_closeout_nav: AccountUnits= sentinel</em>, <em class="sig-param">margin_closeout_margin_used: AccountUnits= sentinel</em>, <em class="sig-param">margin_closeout_percent: DecimalNumber= sentinel</em>, <em class="sig-param">margin_closeout_position_value: DecimalNumber= sentinel</em>, <em class="sig-param">withdrawal_limit: AccountUnits= sentinel</em>, <em class="sig-param">margin_call_margin_used: AccountUnits= sentinel</em>, <em class="sig-param">margin_call_percent: DecimalNumber= sentinel</em>, <em class="sig-param">last_transaction_id: TransactionID= sentinel</em>, <em class="sig-param">trades: ArrayTradeSummary= sentinel</em>, <em class="sig-param">positions: ArrayPosition= sentinel</em>, <em class="sig-param">orders: ArrayOrder= sentinel</em>, <em class="sig-param">financing: DecimalNumber= sentinel</em>, <em class="sig-param">guaranteed_stop_loss_order_mode: GuaranteedStopLossOrderMode= sentinel</em>, <em class="sig-param">resettable_pl_time: DateTime= sentinel</em>, <em class="sig-param">guaranteed_execution_fees: AccountUnits= sentinel</em>, <em class="sig-param">guaranteed_stop_loss_order_mutability: str= sentinel</em>, <em class="sig-param">dividend: DecimalNumber= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/async_v20/definitions/types.html#Account"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.Account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.types.AccountSummary</span></code></p>
+<p>The full details of a client’s Account. This includes full open Trade, open
+Position and pending Order representation.</p>
+<dl class="attribute">
+<dt id="async_v20.Account.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#async_v20.Account.id" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountID" title="async_v20.AccountID"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountID</span></code></a>
+The Account’s identifier</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.alias">
+<code class="sig-name descname">alias</code><a class="headerlink" href="#async_v20.Account.alias" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>
+Client-assigned alias for the Account. Only provided
+if the Account has an alias set</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.currency">
+<code class="sig-name descname">currency</code><a class="headerlink" href="#async_v20.Account.currency" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.Currency" title="async_v20.Currency"><code class="xref py py-class docutils literal notranslate"><span class="pre">Currency</span></code></a>
+The home currency of the Account</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.balance">
+<code class="sig-name descname">balance</code><a class="headerlink" href="#async_v20.Account.balance" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The current balance of the Account. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.created_by_user_id">
+<code class="sig-name descname">created_by_user_id</code><a class="headerlink" href="#async_v20.Account.created_by_user_id" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+ID of the user that created the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.created_time">
+<code class="sig-name descname">created_time</code><a class="headerlink" href="#async_v20.Account.created_time" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DateTime" title="async_v20.DateTime"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTime</span></code></a>
+The date/time when the Account was created.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.pl">
+<code class="sig-name descname">pl</code><a class="headerlink" href="#async_v20.Account.pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The total profit/loss realized over the lifetime of
+the Account. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.resettable_pl">
+<code class="sig-name descname">resettable_pl</code><a class="headerlink" href="#async_v20.Account.resettable_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The total realized profit/loss for the Account since it was
+last reset by the client. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.resettabled_pl_time">
+<code class="sig-name descname">resettabled_pl_time</code><a class="headerlink" href="#async_v20.Account.resettabled_pl_time" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DateTime" title="async_v20.DateTime"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTime</span></code></a>
+The date/time that the Account’s resettablePL was last reset.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.commission">
+<code class="sig-name descname">commission</code><a class="headerlink" href="#async_v20.Account.commission" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The total amount of commission paid over the lifetime
+of the Account. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.margin_rate">
+<code class="sig-name descname">margin_rate</code><a class="headerlink" href="#async_v20.Account.margin_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+Client-provided margin rate override for the Account. The effective margin rate of the Account
+is the lesser of this value and
+the OANDA margin rate for the Account’s division. This value is only provided if a margin rate override
+exists for the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.margin_call_enter_time">
+<code class="sig-name descname">margin_call_enter_time</code><a class="headerlink" href="#async_v20.Account.margin_call_enter_time" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DateTime" title="async_v20.DateTime"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTime</span></code></a>
+The date/time when the Account entered a margin call state.
+Only provided if the Account is in a margin call.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.margin_call_extension_count">
+<code class="sig-name descname">margin_call_extension_count</code><a class="headerlink" href="#async_v20.Account.margin_call_extension_count" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+The number of times that the Account’s current margin call was extended.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.last_margin_call_extension_time">
+<code class="sig-name descname">last_margin_call_extension_time</code><a class="headerlink" href="#async_v20.Account.last_margin_call_extension_time" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DateTime" title="async_v20.DateTime"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTime</span></code></a>
+The date/time of the Account’s last margin call extension.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.open_trade_count">
+<code class="sig-name descname">open_trade_count</code><a class="headerlink" href="#async_v20.Account.open_trade_count" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+The number of Trades currently open in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.open_position_count">
+<code class="sig-name descname">open_position_count</code><a class="headerlink" href="#async_v20.Account.open_position_count" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+The number of Positions currently open in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.pending_order_count">
+<code class="sig-name descname">pending_order_count</code><a class="headerlink" href="#async_v20.Account.pending_order_count" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+The number of Orders currently pending in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.hedging_enabled">
+<code class="sig-name descname">hedging_enabled</code><a class="headerlink" href="#async_v20.Account.hedging_enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>
+Flag indicating that the Account has hedging enabled.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.unrealized_pl">
+<code class="sig-name descname">unrealized_pl</code><a class="headerlink" href="#async_v20.Account.unrealized_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The total unrealized profit/loss for all Trades currently open
+in the Account. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.nav">
+<code class="sig-name descname">nav</code><a class="headerlink" href="#async_v20.Account.nav" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The net asset value of the Account. Equal to
+Account balance + unrealizedPL. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.margin_used">
+<code class="sig-name descname">margin_used</code><a class="headerlink" href="#async_v20.Account.margin_used" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+Margin currently used for the Account.
+Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.margin_available">
+<code class="sig-name descname">margin_available</code><a class="headerlink" href="#async_v20.Account.margin_available" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+Margin available for Account. Represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.position_value">
+<code class="sig-name descname">position_value</code><a class="headerlink" href="#async_v20.Account.position_value" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The value of the Account’s open
+positions represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.margin_closeout_unrealized_pl">
+<code class="sig-name descname">margin_closeout_unrealized_pl</code><a class="headerlink" href="#async_v20.Account.margin_closeout_unrealized_pl" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The Account’s margin closeout unrealized PL.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.margin_closeout_nav">
+<code class="sig-name descname">margin_closeout_nav</code><a class="headerlink" href="#async_v20.Account.margin_closeout_nav" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The Account’s margin closeout NAV.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.margin_closeout_margin_used">
+<code class="sig-name descname">margin_closeout_margin_used</code><a class="headerlink" href="#async_v20.Account.margin_closeout_margin_used" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The Account’s margin closeout margin used.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.margin_closeout_percent">
+<code class="sig-name descname">margin_closeout_percent</code><a class="headerlink" href="#async_v20.Account.margin_closeout_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+The Account’s margin closeout percentage. When this value is 1.0
+or above the Account is in a margin closeout situation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.margin_closeout_position_value">
+<code class="sig-name descname">margin_closeout_position_value</code><a class="headerlink" href="#async_v20.Account.margin_closeout_position_value" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+The value of the Account’s open positions as used
+for margin closeout calculations represented in the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.withdrawal_limit">
+<code class="sig-name descname">withdrawal_limit</code><a class="headerlink" href="#async_v20.Account.withdrawal_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The current WithdrawalLimit for the account which will be zero or
+a positive value indicating how much can be withdrawn from the account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.margin_call_margin_used">
+<code class="sig-name descname">margin_call_margin_used</code><a class="headerlink" href="#async_v20.Account.margin_call_margin_used" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.AccountUnits" title="async_v20.AccountUnits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccountUnits</span></code></a>
+The Account’s margin call margin used.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.margin_call_percent">
+<code class="sig-name descname">margin_call_percent</code><a class="headerlink" href="#async_v20.Account.margin_call_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+The Account’s margin call percentage. When this value is 1.0
+or above the Account is in a margin call situation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.last_transaction_id">
+<code class="sig-name descname">last_transaction_id</code><a class="headerlink" href="#async_v20.Account.last_transaction_id" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.TransactionID" title="async_v20.TransactionID"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransactionID</span></code></a>
+The ID of the last Transaction created for the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.trades">
+<code class="sig-name descname">trades</code><a class="headerlink" href="#async_v20.Account.trades" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="trade.html#async_v20.TradeSummary" title="async_v20.TradeSummary"><code class="xref py py-class docutils literal notranslate"><span class="pre">TradeSummary</span></code></a>, …)
+The details of the Trades currently open in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.positions">
+<code class="sig-name descname">positions</code><a class="headerlink" href="#async_v20.Account.positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="positions.html#async_v20.Position" title="async_v20.Position"><code class="xref py py-class docutils literal notranslate"><span class="pre">Position</span></code></a>, …)
+The details all Account Positions.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Account.orders">
+<code class="sig-name descname">orders</code><a class="headerlink" href="#async_v20.Account.orders" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="order.html#async_v20.Order" title="async_v20.Order"><code class="xref py py-class docutils literal notranslate"><span class="pre">Order</span></code></a>, …)
+The details of the Orders currently pending in the Account.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.AccountChanges">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.</code><code class="sig-name descname">AccountChanges</code><span class="sig-paren">(</span><em class="sig-param">orders_created: ArrayOrder= sentinel</em>, <em class="sig-param">orders_cancelled: ArrayOrder= sentinel</em>, <em class="sig-param">orders_filled: ArrayOrder= sentinel</em>, <em class="sig-param">orders_triggered: ArrayOrder= sentinel</em>, <em class="sig-param">trades_opened: ArrayTradeSummary= sentinel</em>, <em class="sig-param">trades_reduced: ArrayTradeSummary= sentinel</em>, <em class="sig-param">trades_closed: ArrayTradeSummary= sentinel</em>, <em class="sig-param">positions: ArrayPosition= sentinel</em>, <em class="sig-param">transactions: ArrayTransaction= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/async_v20/definitions/types.html#AccountChanges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.AccountChanges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.base.Model</span></code></p>
+<p>An AccountChanges Object is used to represent the changes to an Account’s
+Orders, Trades and Positions since a specified Account TransactionID in the
+past.</p>
+<dl class="attribute">
+<dt id="async_v20.AccountChanges.orders_created">
+<code class="sig-name descname">orders_created</code><a class="headerlink" href="#async_v20.AccountChanges.orders_created" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="order.html#async_v20.Order" title="async_v20.Order"><code class="xref py py-class docutils literal notranslate"><span class="pre">Order</span></code></a>, …)
+The Orders created. These Orders may have been
+filled, cancelled or triggered in the same period.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChanges.orders_cancelled">
+<code class="sig-name descname">orders_cancelled</code><a class="headerlink" href="#async_v20.AccountChanges.orders_cancelled" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="order.html#async_v20.Order" title="async_v20.Order"><code class="xref py py-class docutils literal notranslate"><span class="pre">Order</span></code></a>, …)
+The Orders cancelled.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChanges.orders_filled">
+<code class="sig-name descname">orders_filled</code><a class="headerlink" href="#async_v20.AccountChanges.orders_filled" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="order.html#async_v20.Order" title="async_v20.Order"><code class="xref py py-class docutils literal notranslate"><span class="pre">Order</span></code></a>, …)
+The Orders filled.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChanges.orders_triggered">
+<code class="sig-name descname">orders_triggered</code><a class="headerlink" href="#async_v20.AccountChanges.orders_triggered" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="order.html#async_v20.Order" title="async_v20.Order"><code class="xref py py-class docutils literal notranslate"><span class="pre">Order</span></code></a>, …)
+The Orders triggered.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChanges.trades_opened">
+<code class="sig-name descname">trades_opened</code><a class="headerlink" href="#async_v20.AccountChanges.trades_opened" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="trade.html#async_v20.TradeSummary" title="async_v20.TradeSummary"><code class="xref py py-class docutils literal notranslate"><span class="pre">TradeSummary</span></code></a>, …)
+The Trades opened.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChanges.trades_reduced">
+<code class="sig-name descname">trades_reduced</code><a class="headerlink" href="#async_v20.AccountChanges.trades_reduced" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="trade.html#async_v20.TradeSummary" title="async_v20.TradeSummary"><code class="xref py py-class docutils literal notranslate"><span class="pre">TradeSummary</span></code></a>, …)
+The Trades reduced.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChanges.trades_closed">
+<code class="sig-name descname">trades_closed</code><a class="headerlink" href="#async_v20.AccountChanges.trades_closed" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="trade.html#async_v20.TradeSummary" title="async_v20.TradeSummary"><code class="xref py py-class docutils literal notranslate"><span class="pre">TradeSummary</span></code></a>, …)
+The Trades closed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChanges.positions">
+<code class="sig-name descname">positions</code><a class="headerlink" href="#async_v20.AccountChanges.positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="positions.html#async_v20.Position" title="async_v20.Position"><code class="xref py py-class docutils literal notranslate"><span class="pre">Position</span></code></a>, …)
+The Positions changed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.AccountChanges.transactions">
+<code class="sig-name descname">transactions</code><a class="headerlink" href="#async_v20.AccountChanges.transactions" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="transaction.html#async_v20.Transaction" title="async_v20.Transaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Transaction</span></code></a>, …)
+The Transactions that have been generated.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">async_v20</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../beyond_getting_started.html">Beyond Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../order_request_formatting.html">Formatting Order Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetimes.html">Dealing With Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../health.html">Health API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../traps.html">Traps for young players</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">OandaClient API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../response.html">The Response Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../particularly_pertinent.html">Particularly Pertinent Programming Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../types.html">Class Definitions</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument.html">Instrument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="order.html">Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="positions.html">Positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pricing.html">Pricing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trade.html">Trade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transaction.html">Transaction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../annotations.html">Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html#warnings">Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../types.html">Class Definitions</a><ul>
+      <li>Previous: <a href="../types.html" title="previous chapter">Class Definitions</a></li>
+      <li>Next: <a href="instrument.html" title="next chapter">Instrument</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, James Peter Schinner.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/definitions/account.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

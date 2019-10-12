@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Beyond Getting Started &#8212; async_v20 8.0.0b1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Formatting Order Requests" href="order_request_formatting.html" />
+    <link rel="prev" title="Best Practices" href="best_practices.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="beyond-getting-started">
+<h1>Beyond Getting Started<a class="headerlink" href="#beyond-getting-started" title="Permalink to this headline">¶</a></h1>
+<p>So you have read <a class="reference internal" href="getting_started.html#tutorial"><span class="std std-ref">Using async_v20</span></a> and need to know more.</p>
+<p>Your first issue is knowing what methods to use.</p>
+<p>The <a class="reference internal" href="api.html#api-docs"><span class="std std-ref">OandaClient API</span></a> docs contains all the exposed methods <a class="reference internal" href="glossary.html#term-async-v20"><span class="xref std std-term">async_v20</span></a> provides.</p>
+<div class="section" id="what-you-need-to-know">
+<h2>What you need to know<a class="headerlink" href="#what-you-need-to-know" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="simple">
+<dt><a class="reference internal" href="api.html#oandaclient"><span class="std std-ref">OandaClient</span></a> returns v20 API calls in <a class="reference internal" href="response.html#async_v20.interface.response.Response" title="async_v20.interface.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> objects</dt><dd><p>The <cite>response</cite> is a python dictionary and designed to reflect the responses defined by the v20
+<a class="reference external" href="http://developer.oanda.com/rest-live-v20/introduction/">docs</a> :</p>
+<ul class="simple">
+<li><p>responses contain the equivalent python objects. As defined in <a class="reference internal" href="types.html#class-definitions"><span class="std std-ref">Class Definitions</span></a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><em>OandaClient</em>. Automatically supplys arguments to endpoints that require the following:</p>
+<blockquote>
+<div><dl class="class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.definitions.primitives.</code><code class="sig-name descname">AccountID</code><a class="reference internal" href="_modules/async_v20/definitions/primitives.html#AccountID"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.primitives.Primitive</span></code></p>
+<p>The string representation of an Account Identifier.</p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">Authorization</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#Authorization"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>Contains OANDA’s v20 API authorization token</p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">LastTransactionID</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#LastTransactionID"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.primitives.TransactionID</span></code></p>
+<p>Contains the most recent TransactionID</p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">SinceTransactionID</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#SinceTransactionID"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.primitives.TransactionID</span></code></p>
+<p>The account changes to get Since LastTransactionID for account_changes() method</p>
+</dd></dl>
+
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt><strong>OandaClient</strong> by default will connect to the practice server:</dt><dd><ul class="simple">
+<li><p>OANDA’s <a class="reference external" href="http://developer.oanda.com/rest-live-v20/introduction/">docs</a> Contain host information</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="underling-principles">
+<h2>Underling Principles<a class="headerlink" href="#underling-principles" title="Permalink to this headline">¶</a></h2>
+<p>All arguments passed to <a class="reference internal" href="api.html#api-docs"><span class="std std-ref">OandaClient API</span></a> methods are used to create instances of the parameters annotation.
+Why is this useful?</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Prevents you from importing required class’ and instantiating them manually</p></li>
+<li><p>HTTP requests are formatted based upon the objects the endpoint accepts. See <a class="reference internal" href="#passing-arguments"><span class="std std-ref">How Are Arguments Passed</span></a></p></li>
+<li><p>The base class <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> will convert the object into valid <a class="reference internal" href="glossary.html#term-json"><span class="xref std std-term">JSON</span></a></p></li>
+<li><p>Invalid arguments will raise <a class="reference internal" href="exceptions.html#async_v20.exceptions.InvalidValue" title="async_v20.exceptions.InvalidValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">InvalidValue</span></code></a> catching mistakes earlier</p></li>
+<li><p>Provides flexibility when passing arguments</p></li>
+</ul>
+</div></blockquote>
+<p>Here is an Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="kn">from</span> <span class="nn">async_v20</span> <span class="k">import</span> <span class="n">OandaClient</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">OandaClient</span><span class="p">()</span>
+
+<span class="c1"># This</span>
+<span class="n">coroutine_1</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span><span class="s1">&#39;AUD_USD&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Is the same as this</span>
+<span class="kn">from</span> <span class="nn">async_v20</span> <span class="k">import</span> <span class="n">InstrumentName</span><span class="p">,</span> <span class="n">DecimalNumber</span>
+
+<span class="n">coroutine_2</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span>
+    <span class="n">InstrumentName</span><span class="p">(</span><span class="s1">&#39;AUD_USD&#39;</span><span class="p">),</span> <span class="n">DecimalNumber</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Is the same as this</span>
+<span class="kn">from</span> <span class="nn">async_v20</span> <span class="k">import</span> <span class="n">OrderRequest</span>
+
+<span class="n">coroutine_3</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post_order</span><span class="p">(</span>
+    <span class="n">order_request</span><span class="o">=</span><span class="n">OrderRequest</span><span class="p">(</span>
+        <span class="n">instrument</span><span class="o">=</span><span class="s1">&#39;AUD_USD&#39;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;MARKET&#39;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+        <span class="n">coroutine_1</span><span class="p">,</span>
+        <span class="n">coroutine_2</span><span class="p">,</span>
+        <span class="n">coroutine_3</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Executing this example <strong>will</strong> create a long position of the AUD/USD currency pair
+worth 30 units.</p>
+</div>
+</div>
+<div class="section" id="what-might-be-useful">
+<h2>What might be useful<a class="headerlink" href="#what-might-be-useful" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-are-arguments-passed">
+<span id="passing-arguments"></span><h3>How Are Arguments Passed<a class="headerlink" href="#how-are-arguments-passed" title="Permalink to this headline">¶</a></h3>
+<p>All methods exposed by <em>async_v20</em>. <strong>OandaClient</strong> are written in a declarative fashion.</p>
+<p>Lets take at look at an example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="k">class</span> <span class="nc">InstrumentInterface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="nd">@endpoint</span><span class="p">(</span><span class="n">GETInstrumentsCandles</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get_candles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">instrument</span><span class="p">:</span> <span class="n">InstrumentName</span><span class="p">,</span>
+                    <span class="n">price</span><span class="p">:</span> <span class="n">PriceComponent</span> <span class="o">=</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
+                    <span class="n">granularity</span><span class="p">:</span> <span class="n">CandlestickGranularity</span> <span class="o">=</span> <span class="s1">&#39;S5&#39;</span><span class="p">,</span>
+                    <span class="n">count</span><span class="p">:</span> <span class="n">Count</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span>
+                    <span class="n">from_time</span><span class="p">:</span> <span class="n">FromTime</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span>
+                    <span class="n">to_time</span><span class="p">:</span> <span class="n">ToTime</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span>
+                    <span class="n">smooth</span><span class="p">:</span> <span class="n">Smooth</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                    <span class="n">include_first_query</span><span class="p">:</span> <span class="n">IncludeFirstQuery</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span>
+                    <span class="n">daily_alignment</span><span class="p">:</span> <span class="n">DailyAlignment</span> <span class="o">=</span> <span class="mi">17</span><span class="p">,</span>
+                    <span class="n">alignment_timezone</span><span class="p">:</span> <span class="n">AlignmentTimezone</span> <span class="o">=</span> <span class="s1">&#39;America/New_York&#39;</span><span class="p">,</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl class="simple">
+<dt>The <a class="reference internal" href="glossary.html#term-docstring"><span class="xref std std-term">docstring</span></a> has been left of this example for brevity.</dt><dd><ul class="simple">
+<li><p>This example is not complete without a <cite>pass</cite> statement</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<dl>
+<dt><strong>First</strong></dt><dd><ul class="simple">
+<li><p>We define the endpoint:</p></li>
+</ul>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="k">class</span> <span class="nc">InstrumentInterface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span></pre></div>
+</div>
+</div></blockquote>
+</dd>
+<dt><strong>Then</strong></dt><dd><ul class="simple">
+<li><p>We define arguments to pass to the endpoint</p></li>
+</ul>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">InstrumentInterface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="hll">    <span class="nd">@endpoint</span><span class="p">(</span><span class="n">GETInstrumentsCandles</span><span class="p">)</span>
+</span><span class="hll">    <span class="k">def</span> <span class="nf">get_candles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+</span><span class="hll">                    <span class="n">instrument</span><span class="p">:</span> <span class="n">InstrumentName</span><span class="p">,</span>
+</span><span class="hll">                    <span class="n">price</span><span class="p">:</span> <span class="n">PriceComponent</span> <span class="o">=</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
+</span><span class="hll">                    <span class="n">granularity</span><span class="p">:</span> <span class="n">CandlestickGranularity</span> <span class="o">=</span> <span class="s1">&#39;S5&#39;</span><span class="p">,</span>
+</span><span class="hll">                    <span class="n">count</span><span class="p">:</span> <span class="n">Count</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span>
+</span><span class="hll">                    <span class="n">from_time</span><span class="p">:</span> <span class="n">FromTime</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span>
+</span><span class="hll">                    <span class="n">to_time</span><span class="p">:</span> <span class="n">ToTime</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span>
+</span><span class="hll">                    <span class="n">smooth</span><span class="p">:</span> <span class="n">Smooth</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span class="hll">                    <span class="n">include_first_query</span><span class="p">:</span> <span class="n">IncludeFirstQuery</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span>
+</span><span class="hll">                    <span class="n">daily_alignment</span><span class="p">:</span> <span class="n">DailyAlignment</span> <span class="o">=</span> <span class="mi">17</span><span class="p">,</span>
+</span><span class="hll">                    <span class="n">alignment_timezone</span><span class="p">:</span> <span class="n">AlignmentTimezone</span> <span class="o">=</span> <span class="s1">&#39;America/New_York&#39;</span><span class="p">,</span>
+</span></pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+<p>You will notice that all <a class="reference internal" href="glossary.html#term-arguments"><span class="xref std std-term">arguments</span></a> have an <a class="reference internal" href="glossary.html#term-annotation"><span class="xref std std-term">annotation</span></a>.</p>
+<p>async_v20 uses these annotations to format arguments into
+the correct http request.</p>
+<p>The http request formatting is defined by the <em>EndPoint</em></p>
+<p><strong>In this case</strong></p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GETInstrumentsCandles</span><span class="p">(</span><span class="n">EndPoint</span><span class="p">):</span>
+    <span class="c1"># the HTTP verb to use for this endpoint</span>
+    <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;GET&#39;</span>
+
+    <span class="c1"># path to endpoint</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;/v3/instruments/&#39;</span><span class="p">,</span> <span class="n">InstrumentName</span><span class="p">,</span> <span class="s1">&#39;/candles&#39;</span><span class="p">)</span>
+
+    <span class="c1"># description of endpoint</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Fetch candlestick data for an instrument.&#39;</span>
+
+    <span class="c1"># parameters required to send to endpoint</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="n">Authorization</span><span class="p">:</span> <span class="p">(</span><span class="n">HEADER</span><span class="p">,</span> <span class="s1">&#39;Authorization&#39;</span><span class="p">),</span> <span class="n">AcceptDatetimeFormat</span><span class="p">:</span> <span class="p">(</span><span class="n">HEADER</span><span class="p">,</span> <span class="s1">&#39;Accept-Datetime-Format&#39;</span><span class="p">),</span>
+                  <span class="n">InstrumentName</span><span class="p">:</span> <span class="p">(</span><span class="n">PATH</span><span class="p">,</span> <span class="s1">&#39;instrument&#39;</span><span class="p">),</span> <span class="n">PriceComponent</span><span class="p">:</span> <span class="p">(</span><span class="n">QUERY</span><span class="p">,</span> <span class="s1">&#39;price&#39;</span><span class="p">),</span>
+                  <span class="n">CandlestickGranularity</span><span class="p">:</span> <span class="p">(</span><span class="n">QUERY</span><span class="p">,</span> <span class="s1">&#39;granularity&#39;</span><span class="p">),</span> <span class="n">Count</span><span class="p">:</span> <span class="p">(</span><span class="n">QUERY</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">),</span> <span class="n">FromTime</span><span class="p">:</span> <span class="p">(</span><span class="n">QUERY</span><span class="p">,</span> <span class="s1">&#39;from&#39;</span><span class="p">),</span>
+                  <span class="n">ToTime</span><span class="p">:</span> <span class="p">(</span><span class="n">QUERY</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">),</span> <span class="n">Smooth</span><span class="p">:</span> <span class="p">(</span><span class="n">QUERY</span><span class="p">,</span> <span class="s1">&#39;smooth&#39;</span><span class="p">),</span> <span class="n">IncludeFirstQuery</span><span class="p">:</span> <span class="p">(</span><span class="n">QUERY</span><span class="p">,</span> <span class="s1">&#39;includeFirst&#39;</span><span class="p">),</span>
+                  <span class="n">DailyAlignment</span><span class="p">:</span> <span class="p">(</span><span class="n">QUERY</span><span class="p">,</span> <span class="s1">&#39;dailyAlignment&#39;</span><span class="p">),</span> <span class="n">AlignmentTimezone</span><span class="p">:</span> <span class="p">(</span><span class="n">QUERY</span><span class="p">,</span> <span class="s1">&#39;alignmentTimezone&#39;</span><span class="p">),</span>
+                  <span class="n">WeeklyAlignment</span><span class="p">:</span> <span class="p">(</span><span class="n">QUERY</span><span class="p">,</span> <span class="s1">&#39;weeklyAlignment&#39;</span><span class="p">)}</span>
+
+    <span class="c1"># valid responses</span>
+    <span class="n">responses</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">200</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;instrument&#39;</span><span class="p">:</span> <span class="n">InstrumentName</span><span class="p">,</span> <span class="s1">&#39;granularity&#39;</span><span class="p">:</span> <span class="n">CandlestickGranularity</span><span class="p">,</span> <span class="s1">&#39;candles&#39;</span><span class="p">:</span> <span class="n">ArrayCandlestick</span><span class="p">}}</span>
+
+    <span class="c1"># error msgs&#39;</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">401</span><span class="p">,</span> <span class="mi">404</span><span class="p">,</span> <span class="mi">405</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Notice that</strong></p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="hll">    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="n">Authorization</span><span class="p">:</span> <span class="p">(</span><span class="n">HEADER</span><span class="p">,</span> <span class="s1">&#39;Authorization&#39;</span><span class="p">),</span> <span class="n">AcceptDatetimeFormat</span><span class="p">:</span> <span class="p">(</span><span class="n">HEADER</span><span class="p">,</span> <span class="s1">&#39;Accept-Datetime-Format&#39;</span><span class="p">),</span>
+</span></pre></div>
+</div>
+<p>Contains <a class="reference internal" href="glossary.html#term-key"><span class="xref std std-term">key</span></a> entries that coincide with the methods annotations.
+The annotation is then used to lookup up location of the argument in the HTTP request
+and the corresponding key that will be used with the passed data to create the
+correct key/value pair.</p>
+</div></blockquote>
+</div>
+<div class="section" id="how-responses-are-constructed">
+<h3>How Responses are Constructed<a class="headerlink" href="#how-responses-are-constructed" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="glossary.html#term-http"><span class="xref std std-term">http</span></a> response from <a class="reference internal" href="glossary.html#term-oanda"><span class="xref std std-term">OANDA</span></a> is handled by the <cite>EndPoint</cite>
+each <em>OandaClient</em>. <strong>method</strong> defines.</p>
+<dl class="simple">
+<dt>There is a two step process by which the response is constructed:</dt><dd><ul class="simple">
+<li><p>The http <a class="reference internal" href="glossary.html#term-status"><span class="xref std std-term">status</span></a> is used to look up the expected response</p></li>
+<li><p>Each JSON object is constructed into the appropriate python object</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="how-objects-are-serialized">
+<h3>How Objects are Serialized<a class="headerlink" href="#how-objects-are-serialized" title="Permalink to this headline">¶</a></h3>
+<p>One of the main problems <a class="reference internal" href="glossary.html#term-async-v20"><span class="xref std std-term">async_v20</span></a> solves for you is correctly formatting
+<cite>objects</cite> into JSON that OANDA’s v20 API accepts.</p>
+<p>The issue here is that OANDA defines objects with <a class="reference internal" href="glossary.html#term-camelcase"><span class="xref std std-term">camelCase</span></a> <a class="reference internal" href="glossary.html#term-attributes"><span class="xref std std-term">attributes</span></a>.
+Python programs typically reserve camelCase for <a class="reference internal" href="glossary.html#term-class"><span class="xref std std-term">class</span></a> definitions.</p>
+<p>This means, in order to both satisfy python standards and OANDA,
+objects (as defined in <a class="reference internal" href="types.html#class-definitions"><span class="std std-ref">Class Definitions</span></a>) need to accept <cite>camelCase</cite> and <a class="reference internal" href="glossary.html#term-snake-case"><span class="xref std std-term">snake_case</span></a>
+arguments when being constructed.</p>
+<p><cite>Objects</cite> store there attributes as <cite>snake_case</cite> (as python programmers would expect),
+which adds a further requirement to convert these into <cite>camelCase</cite> when being serialized.</p>
+<p>To solve this the <code class="xref py py-mod docutils literal notranslate"><span class="pre">async_v20.definitions.attributes</span></code> module
+contains two dictionaries. <code class="xref py py-attr docutils literal notranslate"><span class="pre">instance_attributes</span></code>
+&amp; <code class="xref py py-attr docutils literal notranslate"><span class="pre">json_attributes</span></code>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>When creating objects, arguments are passed through <cite>instance_attributes</cite> dictionary</p></li>
+<li><p>When serializing objects, attributes are passed through <cite>json_attributes</cite> dictionary</p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">async_v20</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">Best Practices</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Beyond Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-you-need-to-know">What you need to know</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#underling-principles">Underling Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-might-be-useful">What might be useful</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-are-arguments-passed">How Are Arguments Passed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-responses-are-constructed">How Responses are Constructed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-objects-are-serialized">How Objects are Serialized</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="order_request_formatting.html">Formatting Order Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datetimes.html">Dealing With Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="health.html">Health API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="traps.html">Traps for young players</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">OandaClient API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response.html">The Response Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particularly_pertinent.html">Particularly Pertinent Programming Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">Class Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annotations.html">Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html#warnings">Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="best_practices.html" title="previous chapter">Best Practices</a></li>
+      <li>Next: <a href="order_request_formatting.html" title="next chapter">Formatting Order Requests</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, James Peter Schinner.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/beyond_getting_started.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

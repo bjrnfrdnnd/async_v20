@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pricing &#8212; async_v20 8.0.0b1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Trade" href="trade.html" />
+    <link rel="prev" title="Positions" href="positions.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="pricing">
+<span id="pricing-types"></span><h1>Pricing<a class="headerlink" href="#pricing" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="async_v20.Price">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.</code><code class="sig-name descname">Price</code><span class="sig-paren">(</span><em class="sig-param">type: str= sentinel</em>, <em class="sig-param">instrument: InstrumentName= sentinel</em>, <em class="sig-param">time: DateTime= sentinel</em>, <em class="sig-param">status: PriceStatus= sentinel</em>, <em class="sig-param">tradeable: bool= sentinel</em>, <em class="sig-param">bids: ArrayPriceBucket= sentinel</em>, <em class="sig-param">asks: ArrayPriceBucket= sentinel</em>, <em class="sig-param">closeout_bid: PriceValue= sentinel</em>, <em class="sig-param">closeout_ask: PriceValue= sentinel</em>, <em class="sig-param">quote_home_conversion_factors: QuoteHomeConversionFactors= sentinel</em>, <em class="sig-param">units_available: UnitsAvailable= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/async_v20/definitions/types.html#Price"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.Price" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.base.Model</span></code></p>
+<p>The specification of an Account-specific Price.</p>
+<dl class="attribute">
+<dt id="async_v20.Price.type">
+<code class="sig-name descname">type</code><a class="headerlink" href="#async_v20.Price.type" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>
+The string “PRICE”. Used to identify the a Price object when found in a stream.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Price.instrument">
+<code class="sig-name descname">instrument</code><a class="headerlink" href="#async_v20.Price.instrument" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.InstrumentName" title="async_v20.InstrumentName"><code class="xref py py-class docutils literal notranslate"><span class="pre">InstrumentName</span></code></a>
+The Price’s Instrument.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Price.time">
+<code class="sig-name descname">time</code><a class="headerlink" href="#async_v20.Price.time" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DateTime" title="async_v20.DateTime"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTime</span></code></a>
+The date/time when the Price was created</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Price.status">
+<code class="sig-name descname">status</code><a class="headerlink" href="#async_v20.Price.status" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.PriceStatus" title="async_v20.PriceStatus"><code class="xref py py-class docutils literal notranslate"><span class="pre">PriceStatus</span></code></a>
+The status of the Price.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Price.tradeable">
+<code class="sig-name descname">tradeable</code><a class="headerlink" href="#async_v20.Price.tradeable" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>
+Flag indicating if the Price is tradeable or not</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Price.bids">
+<code class="sig-name descname">bids</code><a class="headerlink" href="#async_v20.Price.bids" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="#async_v20.PriceBucket" title="async_v20.PriceBucket"><code class="xref py py-class docutils literal notranslate"><span class="pre">PriceBucket</span></code></a>, …),
+The list of prices and liquidity available on the Instrument’s bid side. It is possible for this
+list to be empty if there is no bid liquidity currently available for the Instrument in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Price.asks">
+<code class="sig-name descname">asks</code><a class="headerlink" href="#async_v20.Price.asks" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="#async_v20.PriceBucket" title="async_v20.PriceBucket"><code class="xref py py-class docutils literal notranslate"><span class="pre">PriceBucket</span></code></a>, …),
+The list of prices and liquidity available on the Instrument’s ask side. It is possible for this
+list to be empty if there is no ask liquidity currently available for the Instrument in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Price.closeout_bid">
+<code class="sig-name descname">closeout_bid</code><a class="headerlink" href="#async_v20.Price.closeout_bid" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.PriceValue" title="async_v20.PriceValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">PriceValue</span></code></a>
+The closeout bid Price. This Price is used when a bid is required to closeout a Position
+(margin closeout
+or manual) yet there is no bid liquidity. The closeout bid is never used to open a new position.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Price.closeout_ask">
+<code class="sig-name descname">closeout_ask</code><a class="headerlink" href="#async_v20.Price.closeout_ask" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.PriceValue" title="async_v20.PriceValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">PriceValue</span></code></a>
+The closeout ask Price. This Price is used when a ask is required to closeout a Position
+(margin closeout
+or manual) yet there is no ask liquidity. The closeout ask is never used to open a new position.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Price.quote_home_conversion_factors">
+<code class="sig-name descname">quote_home_conversion_factors</code><a class="headerlink" href="#async_v20.Price.quote_home_conversion_factors" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#async_v20.QuoteHomeConversionFactors" title="async_v20.QuoteHomeConversionFactors"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuoteHomeConversionFactors</span></code></a>
+The factors used to convert quantities of this price’s Instrument’s
+quote currency into a quantity of the Account’s home currency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.Price.units_available">
+<code class="sig-name descname">units_available</code><a class="headerlink" href="#async_v20.Price.units_available" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="order.html#async_v20.UnitsAvailable" title="async_v20.UnitsAvailable"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnitsAvailable</span></code></a>
+Representation of how many units of an Instrument are available
+to be traded by an Order depending on its postionFill option.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.PriceBucket">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.</code><code class="sig-name descname">PriceBucket</code><span class="sig-paren">(</span><em class="sig-param">price: PriceValue= sentinel</em>, <em class="sig-param">liquidity: int= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/async_v20/definitions/types.html#PriceBucket"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.PriceBucket" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.base.Model</span></code></p>
+<p>A Price Bucket represents a price available for an amount of liquidity</p>
+<dl class="attribute">
+<dt id="async_v20.PriceBucket.price">
+<code class="sig-name descname">price</code><a class="headerlink" href="#async_v20.PriceBucket.price" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.PriceValue" title="async_v20.PriceValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">PriceValue</span></code></a>
+The Price offered by the PriceBucket</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.PriceBucket.liquidity">
+<code class="sig-name descname">liquidity</code><a class="headerlink" href="#async_v20.PriceBucket.liquidity" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+The amount of liquidity offered by the PriceBucket</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.QuoteHomeConversionFactors">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.</code><code class="sig-name descname">QuoteHomeConversionFactors</code><span class="sig-paren">(</span><em class="sig-param">positive_units: DecimalNumber= sentinel</em>, <em class="sig-param">negative_units: DecimalNumber= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/async_v20/definitions/types.html#QuoteHomeConversionFactors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.QuoteHomeConversionFactors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.base.Model</span></code></p>
+<p>QuoteHomeConversionFactors represents the factors that can be used used to
+convert quantities of a Price’s Instrument’s quote currency into the
+Account’s home currency.</p>
+<dl class="attribute">
+<dt id="async_v20.QuoteHomeConversionFactors.positive_units">
+<code class="sig-name descname">positive_units</code><a class="headerlink" href="#async_v20.QuoteHomeConversionFactors.positive_units" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+The factor used to convert a positive amount of the
+Price’s Instrument’s quote currency into a positive
+amount of the Account’s home currency. Conversion is performed by multiplying
+the quote units by the conversion factor.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.QuoteHomeConversionFactors.negative_units">
+<code class="sig-name descname">negative_units</code><a class="headerlink" href="#async_v20.QuoteHomeConversionFactors.negative_units" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DecimalNumber" title="async_v20.DecimalNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code></a>
+The factor used to convert a negative amount of the Price’s Instrument’s
+quote currency into a negative amount of the Account’s home currency. Conversion is performed by
+multiplying the quote units by the conversion factor.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.ClientPrice">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.</code><code class="sig-name descname">ClientPrice</code><span class="sig-paren">(</span><em class="sig-param">bids: ArrayPriceBucket= sentinel</em>, <em class="sig-param">asks: ArrayPriceBucket= sentinel</em>, <em class="sig-param">closeout_bid: PriceValue= sentinel</em>, <em class="sig-param">closeout_ask: PriceValue= sentinel</em>, <em class="sig-param">timestamp: DateTime= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/async_v20/definitions/types.html#ClientPrice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.ClientPrice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.base.Model</span></code></p>
+<p>Client price for an Account.</p>
+<dl class="attribute">
+<dt id="async_v20.ClientPrice.bids">
+<code class="sig-name descname">bids</code><a class="headerlink" href="#async_v20.ClientPrice.bids" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="#async_v20.PriceBucket" title="async_v20.PriceBucket"><code class="xref py py-class docutils literal notranslate"><span class="pre">PriceBucket</span></code></a>, …),
+The list of prices and liquidity available on the Instrument’s bid side.
+It is possible for this list to be empty if there is no
+bid liquidity currently available for the Instrument in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.ClientPrice.asks">
+<code class="sig-name descname">asks</code><a class="headerlink" href="#async_v20.ClientPrice.asks" title="Permalink to this definition">¶</a></dt>
+<dd><p>( <a class="reference internal" href="#async_v20.PriceBucket" title="async_v20.PriceBucket"><code class="xref py py-class docutils literal notranslate"><span class="pre">PriceBucket</span></code></a>, …),
+The list of prices and liquidity available on the Instrument’s ask side.
+It is possible for this list to be empty if there is no
+ask liquidity currently available for the Instrument in the Account.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.ClientPrice.closeout_bid">
+<code class="sig-name descname">closeout_bid</code><a class="headerlink" href="#async_v20.ClientPrice.closeout_bid" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.PriceValue" title="async_v20.PriceValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">PriceValue</span></code></a>
+The closeout bid Price. This Price is used when a bid is required to closeout a Position
+(margin closeout
+or manual) yet there is no bid liquidity. The closeout bid is never used to open a new position.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.ClientPrice.closeout_ask">
+<code class="sig-name descname">closeout_ask</code><a class="headerlink" href="#async_v20.ClientPrice.closeout_ask" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.PriceValue" title="async_v20.PriceValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">PriceValue</span></code></a>
+The closeout ask Price. This Price is used when a ask is required to closeout a Position
+(margin closeout or manual) yet there is no ask liquidity.
+The closeout ask is never used to open a new position.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.ClientPrice.timestamp">
+<code class="sig-name descname">timestamp</code><a class="headerlink" href="#async_v20.ClientPrice.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DateTime" title="async_v20.DateTime"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTime</span></code></a>
+The date/time when the Price was created.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.PricingHeartbeat">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.</code><code class="sig-name descname">PricingHeartbeat</code><span class="sig-paren">(</span><em class="sig-param">type: str= sentinel</em>, <em class="sig-param">time: DateTime= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/async_v20/definitions/types.html#PricingHeartbeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.PricingHeartbeat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.base.Model</span></code></p>
+<p>A PricingHeartbeat object is injected into the Pricing stream to ensure
+that the HTTP connection remains active.</p>
+<dl class="attribute">
+<dt id="async_v20.PricingHeartbeat.type">
+<code class="sig-name descname">type</code><a class="headerlink" href="#async_v20.PricingHeartbeat.type" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>
+The string “HEARTBEAT”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="async_v20.PricingHeartbeat.time">
+<code class="sig-name descname">time</code><a class="headerlink" href="#async_v20.PricingHeartbeat.time" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../primitives.html#async_v20.DateTime" title="async_v20.DateTime"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateTime</span></code></a>
+The date/time when the Heartbeat was created.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">async_v20</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../beyond_getting_started.html">Beyond Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../order_request_formatting.html">Formatting Order Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datetimes.html">Dealing With Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../health.html">Health API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../traps.html">Traps for young players</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">OandaClient API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../response.html">The Response Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../particularly_pertinent.html">Particularly Pertinent Programming Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../types.html">Class Definitions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="account.html">Account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument.html">Instrument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="order.html">Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="positions.html">Positions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Pricing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trade.html">Trade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transaction.html">Transaction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../annotations.html">Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html#warnings">Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../types.html">Class Definitions</a><ul>
+      <li>Previous: <a href="positions.html" title="previous chapter">Positions</a></li>
+      <li>Next: <a href="trade.html" title="next chapter">Trade</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, James Peter Schinner.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/definitions/pricing.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

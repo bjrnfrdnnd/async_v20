@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Annotations &#8212; async_v20 8.0.0b1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Exceptions" href="exceptions.html" />
+    <link rel="prev" title="Primitives" href="primitives.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="annotations">
+<h1>Annotations<a class="headerlink" href="#annotations" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The class’ in <code class="xref py py-mod docutils literal notranslate"><span class="pre">async_v20.endpoints.annotations</span></code>
+are used as parameter annotations for some <a class="reference internal" href="api.html#api-docs"><span class="std std-ref">OandaClient API</span></a> calls,
+in order to correctly map passed arguments to the correct endpoint
+parameter</p>
+</div>
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.Alias">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">Alias</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#Alias"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.Alias" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.AlignmentTimezone">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">AlignmentTimezone</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#AlignmentTimezone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.AlignmentTimezone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>The timezone to use for the dailyAlignment parameter.
+Candlesticks with daily alignment will be aligned to the
+dailyAlignment hour within the alignmentTimezone.
+[default=America/New_York]</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.Authorization">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">Authorization</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#Authorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.Authorization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>Contains OANDA’s v20 API authorization token</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.Bool">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">Bool</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#Bool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.Bool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.Count">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">Count</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#Count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.Count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+<p>The number of candlesticks to return in the reponse.
+Count should not be specified if both the start and end
+parameters are provided, as the time range combined
+with the graularity will determine the number of
+candlesticks to return. [default=500, maximum=5000]</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.DailyAlignment">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">DailyAlignment</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#DailyAlignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.DailyAlignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+<p>The hour of the day (in the specified timezone)
+to use for granularities that have daily alignments.
+[default=17, minimum=0, maximum=23]</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.End">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">End</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#End"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.End" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>Only show events which started before this date, inclusive.
+Suggested format  RFC 2822 or RFC 1123</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.EventSid">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">EventSid</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#EventSid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.EventSid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>The SID of the event to get</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.FromTime">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">FromTime</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#FromTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.FromTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.primitives.DateTime</span></code></p>
+<p>A DateTime to be used as the starting period of a query</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.FromTransactionID">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">FromTransactionID</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#FromTransactionID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.FromTransactionID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.primitives.TransactionID</span></code></p>
+<p>A TransactionID to be used as the starting period of a query</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.Ids">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">Ids</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#Ids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.Ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.IncludeFirstQuery">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">IncludeFirstQuery</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#IncludeFirstQuery"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.IncludeFirstQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#async_v20.endpoints.annotations.Bool" title="async_v20.endpoints.annotations.Bool"><code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.endpoints.annotations.Bool</span></code></a></p>
+<p>A flag that controls whether the candlestick that is covered by the
+from time should be included in the results. This flag enables clients
+to use the timestamp of the last completed candlestick received to poll
+for future candlesticks but avoid receiving the previous candlestick
+repeatedly. [default=True]</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.Instruments">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">Instruments</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#Instruments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.Instruments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.LastTransactionID">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">LastTransactionID</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#LastTransactionID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.LastTransactionID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.primitives.TransactionID</span></code></p>
+<p>Contains the most recent TransactionID</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.LongClientExtensions">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">LongClientExtensions</code><span class="sig-paren">(</span><em class="sig-param">id: ClientID= sentinel</em>, <em class="sig-param">tag: ClientTag= sentinel</em>, <em class="sig-param">comment: ClientComment= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#LongClientExtensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.LongClientExtensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.types.ClientExtensions</span></code></p>
+<p>The client extensions to add to the MarketOrder used to close the long
+position</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.LongUnits">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">LongUnits</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#LongUnits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.LongUnits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>Indication of how much of the long Position to closeout. Either the
+string “ALL”, the string “NONE”, or a DecimalNumber representing how many
+units of the long position to close using a PositionCloseout MarketOrder.
+The units specified must always be positive.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.PageSize">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">PageSize</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#PageSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.PageSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+<p>The number of Transactions to include in each page
+of the results. [default=100, maximum=1000]</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.ServiceID">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">ServiceID</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#ServiceID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.ServiceID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>The specifier of the service to get</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.ServiceListID">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">ServiceListID</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#ServiceListID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.ServiceListID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>Identification string of service list to get</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.ShortClientExtensions">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">ShortClientExtensions</code><span class="sig-paren">(</span><em class="sig-param">id: ClientID= sentinel</em>, <em class="sig-param">tag: ClientTag= sentinel</em>, <em class="sig-param">comment: ClientComment= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#ShortClientExtensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.ShortClientExtensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.types.ClientExtensions</span></code></p>
+<p>The client extensions to add to the MarketOrder used to close the short
+position</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.ShortUnits">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">ShortUnits</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#ShortUnits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.ShortUnits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>Indication of how much of the short Position to closeout. Either the
+string “ALL”, the string “NONE”, or a DecimalNumber representing how many
+units of the short position to close using a PositionCloseout
+MarketOrder. The units specified must always be positive.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.SinceTransactionID">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">SinceTransactionID</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#SinceTransactionID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.SinceTransactionID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.primitives.TransactionID</span></code></p>
+<p>The account changes to get Since LastTransactionID for account_changes() method</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.Smooth">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">Smooth</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#Smooth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.Smooth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#async_v20.endpoints.annotations.Bool" title="async_v20.endpoints.annotations.Bool"><code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.endpoints.annotations.Bool</span></code></a></p>
+<p>A flag that controls whether the candlestick is
+‘smoothed’ or not. A smoothed candlestick uses the
+previous candle’s close price as its open price,
+while an unsmoothed candlestick uses the first price
+from its time range as its open price. [default=False]</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.Snapshot">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">Snapshot</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#Snapshot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.Snapshot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#async_v20.endpoints.annotations.Bool" title="async_v20.endpoints.annotations.Bool"><code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.endpoints.annotations.Bool</span></code></a></p>
+<p>Flag that enables/disables the sending of a pricing snapshot
+when initially connecting to the stream. [default=True]</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.Start">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">Start</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#Start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.Start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>Only show events which started after this date, inclusive.
+Suggested format  RFC 2822 or RFC 1123</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.StatusID">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">StatusID</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#StatusID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.StatusID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>The ID of the status to get</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.ToTime">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">ToTime</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#ToTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.ToTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.primitives.DateTime</span></code></p>
+<p>A DateTime to be used as the ending period of a query</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.ToTransactionID">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">ToTransactionID</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#ToTransactionID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.ToTransactionID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.primitives.TransactionID</span></code></p>
+<p>A TransactionID to be used as the ending period of a query</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.TradeClientExtensions">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">TradeClientExtensions</code><span class="sig-paren">(</span><em class="sig-param">id: ClientID= sentinel</em>, <em class="sig-param">tag: ClientTag= sentinel</em>, <em class="sig-param">comment: ClientComment= sentinel</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#TradeClientExtensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.TradeClientExtensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">async_v20.definitions.types.ClientExtensions</span></code></p>
+<p>None</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.Type">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">Type</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#Type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.Type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.Units">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">Units</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#Units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.Units" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>Indication of how much of the Trade to close. Either the string “ALL”
+(indicating that all of the Trade should be closed), or a DecimalNumber
+representing the number of units of the open Trade to Close using a
+TradeClose MarketOrder. The units specified must always be positive, and
+the magnitude of the value cannot exceed the magnitude of the Trade’s
+open units</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="async_v20.endpoints.annotations.UserSpecifier">
+<em class="property">class </em><code class="sig-prename descclassname">async_v20.endpoints.annotations.</code><code class="sig-name descname">UserSpecifier</code><a class="reference internal" href="_modules/async_v20/endpoints/annotations.html#UserSpecifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#async_v20.endpoints.annotations.UserSpecifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">async_v20</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beyond_getting_started.html">Beyond Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="order_request_formatting.html">Formatting Order Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datetimes.html">Dealing With Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="health.html">Health API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="traps.html">Traps for young players</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">OandaClient API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response.html">The Response Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particularly_pertinent.html">Particularly Pertinent Programming Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">Class Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives.html">Primitives</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html#warnings">Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="primitives.html" title="previous chapter">Primitives</a></li>
+      <li>Next: <a href="exceptions.html" title="next chapter">Exceptions</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, James Peter Schinner.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/annotations.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

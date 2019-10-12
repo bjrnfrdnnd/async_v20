@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>async_v20.interface.pricing &#8212; async_v20 8.0.0b1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for async_v20.interface.pricing</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.decorators</span> <span class="k">import</span> <span class="n">endpoint</span>
+<span class="kn">from</span> <span class="nn">..definitions.types</span> <span class="k">import</span> <span class="n">DateTime</span>
+<span class="kn">from</span> <span class="nn">..endpoints.annotations</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">..endpoints.pricing</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">..definitions.helpers</span> <span class="k">import</span> <span class="n">sentinel</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PricingInterface&#39;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">PricingInterface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="nd">@endpoint</span><span class="p">(</span><span class="n">GETPricing</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get_pricing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">instruments</span><span class="p">:</span> <span class="n">Instruments</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span>
+                    <span class="n">since</span><span class="p">:</span> <span class="n">DateTime</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get pricing information for a specified list of Instruments within an</span>
+<span class="sd">        Account.</span>
+
+<span class="sd">        Args:</span>
+
+<span class="sd">            instruments: :class:`~async_v20.endpoints.annotations.Instruments`</span>
+<span class="sd">            list of Instruments to get pricing for.</span>
+<span class="sd">            since: :class:`~async_v20.DateTime`</span>
+<span class="sd">                Date/Time filter to apply to the returned prices. Only prices</span>
+<span class="sd">                with a time later than this filter will be provided.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            status [200]</span>
+<span class="sd">                :class:`~async_v20.interface.response.Response`</span>
+<span class="sd">                (prices=( :class:`~async_v20.Price`, ...),</span>
+<span class="sd">                time= :class:`~async_v20.DateTime`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@endpoint</span><span class="p">(</span><span class="n">GETPricingStream</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">stream_pricing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                       <span class="n">instruments</span><span class="p">:</span> <span class="n">Instruments</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span>
+                       <span class="n">snapshot</span><span class="p">:</span> <span class="n">Snapshot</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a stream of Account Prices starting from when the request is made.</span>
+<span class="sd">        This pricing stream does not include every single price created for the</span>
+<span class="sd">        Account, but instead will provide at most 4 prices per second (every</span>
+<span class="sd">        250 milliseconds) for each instrument being requested. If more than one</span>
+<span class="sd">        price is created for an instrument during the 250 millisecond window,</span>
+<span class="sd">        only the price in effect at the end of the window is sent. This means</span>
+<span class="sd">        that during periods of rapid price movement, subscribers to this stream</span>
+<span class="sd">        will not be sent every price. Pricing windows for different connections</span>
+<span class="sd">        to the price stream are not all aligned in the same way (i.e. they are</span>
+<span class="sd">        not all aligned to the top of the second). This means that during</span>
+<span class="sd">        periods of rapid price movement, different subscribers may observe</span>
+<span class="sd">        different prices depending on their alignment.</span>
+
+<span class="sd">        Args:</span>
+
+<span class="sd">            instruments: :class:`~async_v20.endpoints.annotations.Instruments`</span>
+<span class="sd">            list of Instruments to stream Prices for.</span>
+<span class="sd">            snapshot: :class:`~async_v20.endpoints.annotations.Snapshot`</span>
+<span class="sd">                Flag that enables/disables the sending of a pricing snapshot</span>
+<span class="sd">                when initially connecting to the stream.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            status [200]</span>
+<span class="sd">                :class:`~async_v20.interface.response.Response`</span>
+<span class="sd">                (price= :class:`~async_v20.Price`)</span>
+
+<span class="sd">                **OR**</span>
+
+<span class="sd">                :class:`~async_v20.interface.response.Response`</span>
+<span class="sd">                (heartbeat= :class:`~async_v20.PricingHeartbeat`)</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">async_v20</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../best_practices.html">Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../beyond_getting_started.html">Beyond Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../order_request_formatting.html">Formatting Order Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../datetimes.html">Dealing With Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../health.html">Health API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../traps.html">Traps for young players</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">OandaClient API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../response.html">The Response Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../particularly_pertinent.html">Particularly Pertinent Programming Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../types.html">Class Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../annotations.html">Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exceptions.html#warnings">Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, James Peter Schinner.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

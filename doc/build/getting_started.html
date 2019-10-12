@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Getting started &#8212; async_v20 8.0.0b1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Adding Environment Variables" href="environment_variables.html" />
+    <link rel="prev" title="async_v20: Asynchronous OANDA v20 client" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="creating-an-account">
+<span id="create-account"></span><h2>Creating an Account<a class="headerlink" href="#creating-an-account" title="Permalink to this headline">¶</a></h2>
+<p>To use <a class="reference internal" href="glossary.html#term-async-v20"><span class="xref std std-term">async_v20</span></a> you must have an account with <a class="reference internal" href="glossary.html#term-oanda"><span class="xref std std-term">OANDA</span></a></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Create an account <a class="reference external" href="https://www.oanda.com/account/login">HERE</a></p></li>
+<li><p>Create an API <a class="reference internal" href="glossary.html#term-token"><span class="xref std std-term">token</span></a> <a class="reference external" href="https://www.oanda.com/demo-account/tpa/personal_token">ALSO HERE</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="setting-up-environment">
+<span id="id1"></span><h2>Setting up environment<a class="headerlink" href="#setting-up-environment" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Install <a class="reference internal" href="glossary.html#term-async-v20"><span class="xref std std-term">async_v20</span></a> as per <a class="reference internal" href="index.html#installation"><span class="std std-ref">installation</span></a></p></li>
+<li><p>Create a new <a class="reference internal" href="glossary.html#term-environment-variable"><span class="xref std std-term">environment variable</span></a> with the name <cite>OANDA_TOKEN</cite> and value as
+the <a class="reference internal" href="glossary.html#term-token"><span class="xref std std-term">token</span></a> generated from <a class="reference internal" href="#create-account"><span class="std std-ref">Creating an Account</span></a>.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="environment_variables.html">Adding Environment Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="environment_variables.html#pycharm">PyCharm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment_variables.html#mac">Mac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment_variables.html#windows">Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment_variables.html#ubuntu">Ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment_variables.html#what-is-an-environment-variable">What is an environment variable?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="environment_variables.html#why-store-the-token-in-an-environment-variable">Why store the token in an environment variable?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>It is considered best practice use a <a class="reference internal" href="glossary.html#term-virtual-environment"><span class="xref std std-term">virtual environment</span></a></p></li>
+<li><p>It is not required to store the token in an <a class="reference internal" href="glossary.html#term-environment-variable"><span class="xref std std-term">environment variable</span></a>. The token can be passed to <a class="reference internal" href="api.html#oandaclient"><span class="std std-ref">OandaClient</span></a></p></li>
+</ul>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="using-async-v20">
+<span id="tutorial"></span><h2>Using async_v20<a class="headerlink" href="#using-async-v20" title="Permalink to this headline">¶</a></h2>
+<p>Once an account has been created as per <a class="reference internal" href="#create-account"><span class="std std-ref">Creating an Account</span></a>
+and the environment is configured as per <a class="reference internal" href="#setting-up-environment"><span class="std std-ref">Setting up environment</span></a>,
+we are ready to begin.</p>
+<p>Lets first take a look at this code example, then go though it line by line.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">from</span> <span class="nn">async_v20</span> <span class="k">import</span> <span class="n">OandaClient</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">async_v20.definitions.definitions</span> <span class="k">import</span> <span class="n">ROOT_DIR</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">logging.config</span>
+
+<span class="c1"># set up logging</span>
+<span class="n">logging_ini_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT_DIR</span><span class="p">,</span> <span class="s1">&#39;config&#39;</span><span class="p">,</span> <span class="s1">&#39;logging.ini&#39;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">fileConfig</span><span class="p">(</span><span class="n">logging_ini_path</span><span class="p">,</span> <span class="n">disable_existing_loggers</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;async_v20&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;dfdf&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>First we need to import <a class="reference internal" href="glossary.html#term-asyncio"><span class="xref std std-term">asyncio</span></a> this allows us to run our <a class="reference internal" href="glossary.html#term-coroutine"><span class="xref std std-term">coroutine</span></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+</pre></div>
+</div>
+<p>We then import <cite>OandaClient</cite> which provides us the means to interact with OANDA</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inspect</span>
+</pre></div>
+</div>
+<p>Because <cite>OandaClient</cite> returns <cite>coroutines</cite> we use <cite>async def</cite>. This allows the use of the <cite>await</cite> syntax</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">async_v20.definitions.definitions</span> <span class="k">import</span> <span class="n">ROOT_DIR</span>
+</pre></div>
+</div>
+<p><cite>OandaClient</cite> is a <a class="reference internal" href="glossary.html#term-context-manager"><span class="xref std std-term">context manager</span></a>, we use <cite>async with</cite> to instantiate a
+client instance. Doing so will automatically close the <cite>http session</cite> when we’re done</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+</pre></div>
+</div>
+<p>We then create and <a class="reference internal" href="glossary.html#term-await"><span class="xref std std-term">await</span></a> the <a class="reference internal" href="glossary.html#term-coroutine"><span class="xref std std-term">coroutine</span></a> by calling <cite>client</cite>. <strong>account()</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging.config</span>
+</pre></div>
+</div>
+<p>Now we have defined our <a class="reference internal" href="glossary.html#term-coroutine"><span class="xref std std-term">coroutine</span></a> we need to execute it.
+To do so we need an event loop. Achieved using <cite>asyncio</cite>. <strong>get_event_loop()</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">logging_ini_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT_DIR</span><span class="p">,</span> <span class="s1">&#39;config&#39;</span><span class="p">,</span> <span class="s1">&#39;logging.ini&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The value returned by executing the <cite>account</cite> <a class="reference internal" href="glossary.html#term-coroutine"><span class="xref std std-term">coroutine</span></a> is accessed through the event loop.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">logging</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">fileConfig</span><span class="p">(</span><span class="n">logging_ini_path</span><span class="p">,</span> <span class="n">disable_existing_loggers</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="glossary.html#term-async-v20"><span class="xref std std-term">async_v20</span></a> objects have a <cite>Model</cite>. <strong>series()</strong> method that returns a <a class="reference internal" href="glossary.html#term-pandas"><span class="xref std std-term">pandas</span></a>. <strong>Series</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;dfdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each application should only instantiate <strong>ONE</strong> OandaClient instance per account.
+See <a class="reference internal" href="best_practices.html#best-practices"><span class="std std-ref">Best Practices</span></a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">async_v20</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-an-account">Creating an Account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-environment">Setting up environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="environment_variables.html">Adding Environment Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-async-v20">Using async_v20</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beyond_getting_started.html">Beyond Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="order_request_formatting.html">Formatting Order Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datetimes.html">Dealing With Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="health.html">Health API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="traps.html">Traps for young players</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">OandaClient API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response.html">The Response Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particularly_pertinent.html">Particularly Pertinent Programming Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">Class Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annotations.html">Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html#warnings">Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">async_v20: Asynchronous OANDA v20 client</a></li>
+      <li>Next: <a href="environment_variables.html" title="next chapter">Adding Environment Variables</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, James Peter Schinner.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/getting_started.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

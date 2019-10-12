@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Best Practices &#8212; async_v20 8.0.0b1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Beyond Getting Started" href="beyond_getting_started.html" />
+    <link rel="prev" title="Adding Environment Variables" href="environment_variables.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="best-practices">
+<span id="id1"></span><h1>Best Practices<a class="headerlink" href="#best-practices" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="one-oandaclient-per-application">
+<h2>One OandaClient per application<a class="headerlink" href="#one-oandaclient-per-application" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="getting_started.html#tutorial"><span class="std std-ref">Using async_v20</span></a> example, used <a class="reference internal" href="api.html#oandaclient"><span class="std std-ref">OandaClient</span></a> as a context manager. This is correct when
+the client does not need to be shared between multiple <a class="reference internal" href="glossary.html#term-coroutines"><span class="xref std std-term">coroutines</span></a>.</p>
+<p>This is a an example of multiple coroutines using the <strong>One</strong> OandaClient instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="kn">from</span> <span class="nn">async_v20</span> <span class="k">import</span> <span class="n">OandaClient</span>
+
+<span class="hll"><span class="n">client</span> <span class="o">=</span> <span class="n">OandaClient</span><span class="p">()</span>
+</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">poll_account</span><span class="p">(</span><span class="n">poll_interval</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">):</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">account</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">account</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">account</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">poll_interval</span><span class="p">)</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">stream</span><span class="p">(</span><span class="n">instruments</span><span class="p">,</span> <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">stream_pricing</span><span class="p">(</span><span class="n">instruments</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
+
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">poll_account</span><span class="p">(),</span> <span class="n">stream</span><span class="p">(</span><span class="s1">&#39;EUR_USD&#39;</span><span class="p">))</span>
+    <span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="initialize-first">
+<h2>Initialize first<a class="headerlink" href="#initialize-first" title="Permalink to this headline">¶</a></h2>
+<p><cite>OandaClient</cite> requires initialization. The initialization procedure can delay execution of <cite>OandaClient</cite>. <strong>methods</strong></p>
+<p>If this is a concern for you, it is recommended to preemptively initialize the OandaClient instance.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="kn">from</span> <span class="nn">async_v20</span> <span class="k">import</span> <span class="n">OandaClient</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">OandaClient</span><span class="p">()</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="hll"><span class="n">response</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">initialize</span><span class="p">())</span>
+</span>
+<span class="c1"># Write your code here</span>
+
+<span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="check-services">
+<h2>Check Services<a class="headerlink" href="#check-services" title="Permalink to this headline">¶</a></h2>
+<p>It is encouraged to check the service you wish to consume is available. See <a class="reference internal" href="health.html#health-api"><span class="std std-ref">Health API</span></a>.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">async_v20</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Best Practices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#one-oandaclient-per-application">One OandaClient per application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initialize-first">Initialize first</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#check-services">Check Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="beyond_getting_started.html">Beyond Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="order_request_formatting.html">Formatting Order Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datetimes.html">Dealing With Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="health.html">Health API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="traps.html">Traps for young players</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">OandaClient API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response.html">The Response Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particularly_pertinent.html">Particularly Pertinent Programming Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">Class Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annotations.html">Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html#warnings">Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="environment_variables.html" title="previous chapter">Adding Environment Variables</a></li>
+      <li>Next: <a href="beyond_getting_started.html" title="next chapter">Beyond Getting Started</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, James Peter Schinner.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/best_practices.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

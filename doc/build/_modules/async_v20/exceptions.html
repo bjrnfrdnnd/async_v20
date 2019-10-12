@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>async_v20.exceptions &#8212; async_v20 8.0.0b1 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for async_v20.exceptions</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="AsyncV20Exception"><a class="viewcode-back" href="../../exceptions.html#async_v20.exceptions.AsyncV20Exception">[docs]</a><span></span><span class="k">class</span> <span class="nc">AsyncV20Exception</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A base exception for all exceptions in the async_v20 package&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<span class="k">class</span> <span class="nc">AsyncV20Warning</span><span class="p">(</span><span class="ne">Warning</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A base warning for all warnings in the async_v20 package&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<div class="viewcode-block" id="InitializationFailure"><a class="viewcode-back" href="../../exceptions.html#async_v20.exceptions.InitializationFailure">[docs]</a><span class="k">class</span> <span class="nc">InitializationFailure</span><span class="p">(</span><span class="n">AsyncV20Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;OandaClient Failed to initialize&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="ResponseTimeout"><a class="viewcode-back" href="../../exceptions.html#async_v20.exceptions.ResponseTimeout">[docs]</a><span class="k">class</span> <span class="nc">ResponseTimeout</span><span class="p">(</span><span class="n">AsyncV20Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The server took to long to respond&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<span class="k">class</span> <span class="nc">URLDoesNotExistError</span><span class="p">(</span><span class="n">AsyncV20Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The requested url does not exist (status 404 was returned)&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<div class="viewcode-block" id="CloseAllTradesFailure"><a class="viewcode-back" href="../../exceptions.html#async_v20.exceptions.CloseAllTradesFailure">[docs]</a><span class="k">class</span> <span class="nc">CloseAllTradesFailure</span><span class="p">(</span><span class="n">AsyncV20Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Failed to close all trades&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="InvalidValue"><a class="viewcode-back" href="../../exceptions.html#async_v20.exceptions.InvalidValue">[docs]</a><span class="k">class</span> <span class="nc">InvalidValue</span><span class="p">(</span><span class="n">AsyncV20Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A supplied value does not meet the specification</span>
+<span class="sd">    of valid values&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="InvalidFormatArguments"><a class="viewcode-back" href="../../exceptions.html#async_v20.exceptions.InvalidFormatArguments">[docs]</a><span class="k">class</span> <span class="nc">InvalidFormatArguments</span><span class="p">(</span><span class="n">AsyncV20Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Arguments to format a DecimalNumber or PriceValue</span>
+<span class="sd">    are invalid&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="IncompatibleValue"><a class="viewcode-back" href="../../exceptions.html#async_v20.exceptions.IncompatibleValue">[docs]</a><span class="k">class</span> <span class="nc">IncompatibleValue</span><span class="p">(</span><span class="n">AsyncV20Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A supplied argument is different than the predefined value&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="UnknownKeywordArgument"><a class="viewcode-back" href="../../exceptions.html#async_v20.exceptions.UnknownKeywordArgument">[docs]</a><span class="k">class</span> <span class="nc">UnknownKeywordArgument</span><span class="p">(</span><span class="n">AsyncV20Warning</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A passed keyword argument is not in the objects __init__ signature&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="InstantiationFailure"><a class="viewcode-back" href="../../exceptions.html#async_v20.exceptions.InstantiationFailure">[docs]</a><span class="k">class</span> <span class="nc">InstantiationFailure</span><span class="p">(</span><span class="n">AsyncV20Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;async_v20 was unable to create an object from the passed arguments&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="UnexpectedStatus"><a class="viewcode-back" href="../../exceptions.html#async_v20.exceptions.UnexpectedStatus">[docs]</a><span class="k">class</span> <span class="nc">UnexpectedStatus</span><span class="p">(</span><span class="n">AsyncV20Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The server returned an unexpected HTTP status&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="FailedToCreatePath"><a class="viewcode-back" href="../../exceptions.html#async_v20.exceptions.FailedToCreatePath">[docs]</a><span class="k">class</span> <span class="nc">FailedToCreatePath</span><span class="p">(</span><span class="n">AsyncV20Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Unable to construct the path for the requested endpoint&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="InvalidOrderRequest"><a class="viewcode-back" href="../../exceptions.html#async_v20.exceptions.InvalidOrderRequest">[docs]</a><span class="k">class</span> <span class="nc">InvalidOrderRequest</span><span class="p">(</span><span class="n">AsyncV20Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The order request is not with in the instruments specification</span>
+<span class="sd">    the order is for&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">async_v20</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../beyond_getting_started.html">Beyond Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../order_request_formatting.html">Formatting Order Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datetimes.html">Dealing With Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../health.html">Health API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../traps.html">Traps for young players</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">OandaClient API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../response.html">The Response Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../particularly_pertinent.html">Particularly Pertinent Programming Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../types.html">Class Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../annotations.html">Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../exceptions.html#warnings">Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, James Peter Schinner.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,13 @@
+2019-06-29 19:26:10,088 - async_v20 - WARNING - <module> - 15 - dfdf
+2019-06-29 19:26:10,088 - asyncio - DEBUG - __init__ - 53 - Using selector: EpollSelector
+2019-06-29 19:26:10,088 - async_v20.client - INFO - initialize - 299 - Initializing client
+2019-06-29 19:26:10,088 - async_v20.client - INFO - initialize_session - 263 - Initializing session
+2019-06-29 19:26:10,088 - async_v20.interface.decorators - INFO - wrap - 37 - list_services(args=(), kwargs={})
+2019-06-29 19:26:10,133 - async_v20.interface.parser - WARNING - _rest_response - 65 - requested url does not exist; status returned is 404; url: http://api-status.oanda.com:80/api/v1/services
+2019-06-29 19:26:10,133 - async_v20.interface.parser - WARNING - parse_response - 142 - Querying the Health API using path :('/api/v1/services',) failed
+2019-06-29 19:26:10,133 - async_v20.client - WARNING - initialize - 310 - Server did not return available services; response is None
+2019-06-29 19:26:10,133 - async_v20.interface.decorators - INFO - wrap - 37 - list_accounts(args=(), kwargs={})
+2019-06-29 19:26:10,745 - async_v20.interface.decorators - INFO - wrap - 37 - get_account_details(args=(), kwargs={})
+2019-06-29 19:26:10,880 - async_v20.interface.decorators - INFO - wrap - 37 - account_instruments(args=(), kwargs={})
+2019-06-29 19:26:11,023 - async_v20.client - INFO - account - 181 - account()
+2019-06-29 19:26:11,024 - async_v20.interface.decorators - INFO - wrap - 37 - account_changes(args=(), kwargs={})
