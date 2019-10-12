@@ -22,7 +22,7 @@ async_v20: Asynchronous OANDA v20 client
 
 Disclaimer (by BN)
 ------------------
-A fork of the excellent package 'async-v20 https://github.com/jamespeterschinner/async_v20'.
+A fork of the excellent package `async-v20 https://github.com/jamespeterschinner/async_v20`.
 As OANDA is changing its API a bit and does not well document it, the original version of async-v20 is
 not fully functional at the moment.
 This fork is a bit updated, allowing some additional keyword arguments and JSON structures that OANDA sends
