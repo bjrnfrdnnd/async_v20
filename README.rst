@@ -22,11 +22,11 @@ async_v20: Asynchronous OANDA v20 client
 Documentation
 -------------
 
-http://async-v20.readthedocs.io/
+https://async-v20-bn.readthedocs.io/en/bn
 
 Disclaimer (BN)
 ---------------
-A fork of the excellent package `async-v20 <https://github.com/jamespeterschinner/async_v20>`_.
+A fork of the excellent package `async_v20 <https://github.com/jamespeterschinner/async_v20>`_.
 As OANDA is changing its API a bit and does not well document it, the original version of async-v20 is
 not fully functional at the moment.
 This fork is a bit updated, allowing some additional keyword arguments and JSON structures that OANDA sends
@@ -60,7 +60,7 @@ python >= 3.6
 
 https://www.python.org/
 
-    $ pip install async_v20
+    $ conda install -c bjrn async_v20
 
 
 `async_v20` is built with `aiohttp <https://github.com/aio-libs/aiohttp>`_.
