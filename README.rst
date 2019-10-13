@@ -18,9 +18,6 @@ async_v20: Asynchronous OANDA v20 client
    :target: http://async-v20.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
-df
-df
-
 
 Documentation
 -------------
