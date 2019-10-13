@@ -38,4 +38,4 @@ Annotations
 .. autoclass:: async_v20.endpoints.annotations.TradeClientExtensions
 .. autoclass:: async_v20.endpoints.annotations.Type
 .. autoclass:: async_v20.endpoints.annotations.Units
-.. autoclass:: async_v20.endpoints.annotations.UserSpecifier
+.. autoclass:: async_v20.endpoints.annotations.UserSpecifiee
