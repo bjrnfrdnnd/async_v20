@@ -1,4 +1,3 @@
-
 async_v20: Asynchronous OANDA v20 client
 ========================================
    *A foreign exchange client*
