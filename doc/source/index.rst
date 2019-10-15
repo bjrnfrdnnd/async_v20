@@ -20,6 +20,15 @@ async_v20: Asynchronous OANDA v20 client
   :target: http://async-v20.readthedocs.io/en/latest/?badge=latest
   :alt: Documentation Status
 
+Disclaimer (by BN)
+------------------
+A fork of the excellent package `async_v20 <https://github.com/jamespeterschinner/async_v20>`_.
+As OANDA is changing its API a bit and does not well document it, the original version of async-v20 is
+not fully functional at the moment.
+This fork is a bit updated, allowing some additional keyword arguments and JSON structures that OANDA sends
+and/or requests.
+
+
 Disclaimer
 ----------
 
@@ -31,7 +40,7 @@ Disclaimer
 Features
 ---------
 
-- Exposes the entire `v20 API <http://developer.oanda.com/rest-live-v20/introduction/>`_ `
+- Exposes the entire `v20 API <http://developer.oanda.com/rest-live-v20/introduction/>`_
 - immutable objects
 - No `*args, **kwargs` In client methods. So no guessing what arguments a method takes
 - Serialize objects directly into *pandas* **Series** or **DataFrame** objects
