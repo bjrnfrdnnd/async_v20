@@ -172,7 +172,7 @@ class OandaClient(AccountInterface, InstrumentInterface, OrderInterface, Positio
         self.debug = debug
 
     async def account(self):
-        """Get updated account
+        """Get updated account;
 
         Returns:
 

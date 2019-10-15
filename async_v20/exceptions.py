@@ -48,6 +48,10 @@ class UnexpectedStatus(AsyncV20Exception):
     """The server returned an unexpected HTTP status"""
     pass
 
+class URLNotFoundError(AsyncV20Exception):
+    """The url was not found"""
+    pass
+
 class FailedToCreatePath(AsyncV20Exception):
     """Unable to construct the path for the requested endpoint"""
     pass
