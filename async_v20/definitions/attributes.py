@@ -181,13 +181,13 @@ instance_attributes = {'long': 'long', 'short': 'short', 'default': 'default', '
                        'fullVWAP': 'full_vwap', 'full_vwap': 'full_vwap',
                        'initialMarginRequired': 'initial_margin_required',
                        'initial_margin_required': 'initial_margin_required',
-                       'guaranteedStopLossOrderMutability': 'guaranteed_stop_loss_order_mutability',
-                       'guaranteed_stop_loss_order_mutability': 'guaranteed_stop_loss_order_mutability',
+                       # 'guaranteedStopLossOrderMutability': 'guaranteed_stop_loss_order_mutability',
+                       # 'guaranteed_stop_loss_order_mutability': 'guaranteed_stop_loss_order_mutability',
                        'minimumGuaranteedStopLossDistance': 'minimum_guaranteed_stop_loss_distance',
                        'minimum_guaranteed_stop_loss_distance': 'minimum_guaranteed_stop_loss_distance',
-                       'guaranteedStopLossOrderExecutionPremium': 'guaranteed_stop_loss_order_execution_premium',
-                       'guaranteed_stop_loss_order_execution_premium': 'guaranteedStopLossOrderExecutionPremium',
-                       'dividend': 'dividend'
+                       # 'guaranteedStopLossOrderExecutionPremium': 'guaranteed_stop_loss_order_execution_premium',
+                       # 'guaranteed_stop_loss_order_execution_premium': 'guaranteedStopLossOrderExecutionPremium',
+                       'dividend': 'dividend',
                        }
 
 json_attributes = {'long': 'long', 'short': 'short', 'default': 'default', 'reduce_first': 'reduceFirst',
@@ -285,8 +285,8 @@ json_attributes = {'long': 'long', 'short': 'short', 'default': 'default', 'redu
                    'guaranteed_stop_loss_order_level_restriction':'guaranteedStopLossOrderLevelRestriction',
                    'requested_units':'requestedUnits', 'full_vwap': 'fullVWAP',
                    'initial_margin_required':'initialMarginRequired',
-                   'guaranteed_stop_loss_order_mutability': 'guaranteedStopLossOrderMutability',
+                   # 'guaranteed_stop_loss_order_mutability': 'guaranteedStopLossOrderMutability',
                    'minimum_guaranteed_stop_loss_distance': 'minimumGuaranteedStopLossDistance',
-                    'guaranteed_stop_loss_order_execution_premium': 'guaranteedStopLossOrderExecutionPremium',
-                   'dividend': 'dividend'
+                   'guaranteed_stop_loss_order_execution_premium': 'guaranteedStopLossOrderExecutionPremium',
+                   'dividend': 'dividend',
                    }

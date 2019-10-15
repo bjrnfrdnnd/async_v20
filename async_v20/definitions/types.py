@@ -1312,7 +1312,8 @@ class Instrument(Model):
                  guaranteed_stop_loss_order_level_restriction: GuaranteedStopLossOrderLevelRestriction = sentinel,
                  tags: ArrayDict = sentinel,
                  minimum_guaranteed_stop_loss_distance: DecimalNumber = sentinel,
-                 guaranteed_stop_loss_order_execution_premium: DecimalNumber = sentinel):
+                 # guaranteed_stop_loss_order_execution_premium: DecimalNumber = sentinel,
+                 ):
         Model.__init__(**locals())
 
 
@@ -2079,8 +2080,9 @@ class AccountSummary(Model):
                  guaranteed_stop_loss_order_mode: GuaranteedStopLossOrderMode = sentinel,
                  resettable_pl_time: DateTime = sentinel,
                  guaranteed_execution_fees: AccountUnits = sentinel,
-                 guaranteed_stop_loss_order_mutability: str = sentinel,
-                 dividend: AccountUnits = sentinel):
+                 # guaranteed_stop_loss_order_mutability: str = sentinel,
+                 dividend: AccountUnits = sentinel,
+                 ):
         Model.__init__(**locals())
 
 
