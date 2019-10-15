@@ -5,7 +5,7 @@ from async_v20.definitions.base import Model
 from async_v20.definitions.base import create_attribute
 from async_v20.definitions.types import OrderRequest
 from tests.test_definitions.helpers import get_valid_primitive_data, create_cls_annotations
-from async_v20.exceptions import UnknownKeywordArgument, InstantiationFailure
+from async_v20.exceptions import UnknownKeywordArgument
 import logging
 logger = logging.getLogger('async_v20')
 logger.disabled = True

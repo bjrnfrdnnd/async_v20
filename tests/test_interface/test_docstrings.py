@@ -1,6 +1,5 @@
 import pytest
 from async_v20 import interface
-from inspect import Parameter
 import logging
 logger = logging.getLogger('async_v20')
 logger.disabled = True

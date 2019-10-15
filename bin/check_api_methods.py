@@ -15,7 +15,7 @@ print('RUNNING TEST')
 
 rsp = run(
     client.account(),
-    # client.list_accounts(),
+    client.list_accounts(),
     # client.get_account_details(),
     # client.account_summary(),
     # client.account_instruments(),
