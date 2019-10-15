@@ -188,7 +188,6 @@ instance_attributes = {'long': 'long', 'short': 'short', 'default': 'default', '
                        # 'guaranteedStopLossOrderExecutionPremium': 'guaranteed_stop_loss_order_execution_premium',
                        # 'guaranteed_stop_loss_order_execution_premium': 'guaranteedStopLossOrderExecutionPremium',
                        'dividend': 'dividend',
-
                        }
 
 json_attributes = {'long': 'long', 'short': 'short', 'default': 'default', 'reduce_first': 'reduceFirst',
