@@ -43,17 +43,16 @@ def json_to_instance_attributes(self, kwargs, template):
             # warnings.warn(msg, UnknownKeywordArgument)
 
 
-def domain_check(value, example=None, possible_values=None):
+def domain_check(value, example=None, possible_values=None, class_checked=None):
     if example:
         if not len(str(value)) in [len(str(example)), len(str(example)) + 1]:
-            msg = f'{value} does not match length of example {example}'
+            msg = f'{value} does not match length of example {example}; class_checked: {class_checked}'
             logger.error(msg)
             raise InvalidValue(msg)
 
     if possible_values:
         if not value in possible_values:
-            possible_values = ', '.join(possible_values)
-            msg = f'{value} must be in {possible_values}. Possible values are {possible_values}'
+            msg = f'{value} must be in {possible_values}. Possible values are {possible_values}; class_checked: {class_checked}'
             logger.error(msg)
             raise InvalidValue(msg)
 

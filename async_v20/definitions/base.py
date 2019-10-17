@@ -174,7 +174,6 @@ class Model(object, metaclass=Metaclass):
             json: - bool. True converts dict keys into JSON format
             datetime_format: - str. convert pd.Timestamps to desired format
         """
-
         def fields():
 
             for field in self._fields:

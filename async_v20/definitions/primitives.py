@@ -680,9 +680,9 @@ class Reason(Primitive, str):
 
     def __new__(cls, value, possible_values=None):
         if possible_values:
-            assert domain_check(value, possible_values=possible_values)
+            assert domain_check(value, possible_values=possible_values, class_checked=cls)
         else:
-            assert domain_check(value, possible_values=Reason.values)
+            assert domain_check(value, possible_values=Reason.values, class_checked=cls)
         return str.__new__(cls, value)
 
 
@@ -1178,10 +1178,12 @@ class TransactionRejectReason(Reason):
                                           ' modification',
         'REPLACING_ORDER_INVALID': 'The Order to be replaced has a different type than the replacing Order.',
         'REPLACING_TRADE_ID_INVALID': 'The replacing Order refers to a different Trade than the Order that is being '
-                                      'replaced.'
+                                      'replaced.',
+        'MARGIN_CONDITIONS_SATISFIED': 'Not in OANDA\'s docs',
     }
 
     def __new__(cls, value):
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value, possible_values=cls.values)
 
 
