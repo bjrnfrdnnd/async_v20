@@ -267,7 +267,8 @@ class OandaClient(AccountInterface, InstrumentInterface, OrderInterface, Positio
             json_serialize=json.dumps,
             headers=self.headers,
             connector=conn,
-            read_timeout=0  # async_v20 will handle timeouts to allow dynamic changing of timeout.
+            timeout = aiohttp.ClientTimeout(0)
+            # read_timeout=0  # async_v20 will handle timeouts to allow dynamic changing of timeout.
             # after client initialization
         )
 
