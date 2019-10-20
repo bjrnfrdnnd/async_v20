@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Formatting Order Requests &#8212; async_v20 8.0.0b1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Dealing With Time" href="datetimes.html" />
+    <link rel="prev" title="Beyond Getting Started" href="beyond_getting_started.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="formatting-order-requests">
+<h1>Formatting Order Requests<a class="headerlink" href="#formatting-order-requests" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="api.html#async_v20.OandaClient" title="async_v20.OandaClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">OandaClient</span></code></a> provides the option to format <code class="xref py py-class docutils literal notranslate"><span class="pre">OrderRequest</span></code>’s
+in the context of the instrument the OrderRequest is for.</p>
+<p>Confused? So was I, Let’s have a look at an <cite>instrument</cite>. <strong>series()</strong>
+representation of an <code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">display_name</span>                      <span class="n">Brent</span> <span class="n">Crude</span> <span class="n">Oil</span>
+<span class="hll"><span class="n">display_precision</span>                               <span class="mi">3</span>
+</span><span class="n">margin_rate</span>                                  <span class="mf">0.05</span>
+<span class="hll"><span class="n">maximum_order_units</span>                        <span class="mi">100000</span>
+</span><span class="hll"><span class="n">maximum_position_size</span>                           <span class="mi">0</span>
+</span><span class="hll"><span class="n">maximum_trailing_stop_distance</span>                <span class="mi">100</span>
+</span><span class="hll"><span class="n">minimum_trade_size</span>                              <span class="mi">1</span>
+</span><span class="hll"><span class="n">minimum_trailing_stop_distance</span>               <span class="mf">0.05</span>
+</span><span class="n">name</span>                                      <span class="n">BCO_USD</span>
+<span class="n">pip_location</span>                                   <span class="o">-</span><span class="mi">2</span>
+<span class="hll"><span class="n">trade_units_precision</span>                           <span class="mi">0</span>
+</span><span class="nb">type</span>                                          <span class="n">CFD</span>
+<span class="n">dtype</span><span class="p">:</span> <span class="nb">object</span>
+</pre></div>
+</div>
+<p>The above instrument outlines the formatting of an <em>OrderRequest</em> for the <em>Instrument</em> (in this case <em>Brent Crude Oil</em>).
+Take <em>Instrument</em>. <strong>trade_units_precision</strong> as an example, this attribute defines how many decimal places
+<code class="xref py py-class docutils literal notranslate"><span class="pre">OrderRequest</span></code>. <strong>units</strong> may be used for this instrument (our example <em>0</em>).</p>
+<p>You will also notice <strong>minimum</strong> and <strong>maximum</strong> values for other <em>OrderRequest</em> attributes.</p>
+<p><em>OandaClient</em>. <strong>format_order_requests</strong> is a boolean value which changes the degree to which
+<em>OrderRequest</em>’s will be modified to comply with the instrument specification.
+If <strong>format_order_requests</strong> is set to
+<code class="xref py py-class docutils literal notranslate"><span class="pre">True</span></code> <em>OandaClient</em> will modify values so that they are within
+the valid range specified by the instrument.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I believe most users will want to use this feature as it dramatically
+reduces the complexity of placing valid OrderRequests. It is disabled by default.</p>
+<p>Only enable this feature if you understand that your <cite>OrderRequest</cite>. <strong>stop_loss_on_fill</strong>/
+<strong>take_profit_on_fill</strong>/<strong>trailing_stop_loss_distance</strong> and <strong>price_bound</strong> configuration may
+be altered to comply with the instruments valid ranges.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The precision of <code class="xref py py-class docutils literal notranslate"><span class="pre">DecimalNumber</span></code> and
+<code class="xref py py-class docutils literal notranslate"><span class="pre">PriceValue</span></code> will <strong>always</strong> be rounded
+to the correct precision for the instrument, regardless of <em>OandaClient</em>. <strong>format_order_requests</strong>
+value.</p>
+</div>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">async_v20</span> <span class="kn">import</span> <span class="n">OandaClient</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">OandaClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span><span class="s1">&#39;AUD_USD&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">OrderRequest units 0.0 are less than the minimum trade size 1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span><span class="s1">&#39;AUD_USD&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">&lt;Status [201]: orderCreateTransaction, orderFillTransaction, relatedTransactionIDs, lastTransactionID&gt;</span>
+<span class="hll"><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">format_order_requests</span>
+</span><span class="hll"><span class="go">False</span>
+</span><span class="hll"><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">format_order_requests</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span><span class="s1">&#39;AUD_USD&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="go">&lt;Status [201]: orderCreateTransaction, orderFillTransaction, relatedTransactionIDs, lastTransactionID&gt;</span>
+<span class="hll"><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">format_order_requests</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span><span class="s1">&#39;AUD_USD&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">trailing_stop_loss_on_fill</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">Trailing stop loss distance 0.0 is not within AUD_USD specified range 0.0005 - 1.0</span>
+<span class="hll"><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">format_order_requests</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span><span class="s1">&#39;AUD_USD&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">trailing_stop_loss_on_fill</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="go">&lt;Status [201]: orderCreateTransaction, orderFillTransaction, relatedTransactionIDs, lastTransactionID&gt;</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">async_v20</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beyond_getting_started.html">Beyond Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Formatting Order Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datetimes.html">Dealing With Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="health.html">Health API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="traps.html">Traps for young players</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">OandaClient API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response.html">The Response Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particularly_pertinent.html">Particularly Pertinent Programming Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">Class Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annotations.html">Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html#warnings">Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="beyond_getting_started.html" title="previous chapter">Beyond Getting Started</a></li>
+      <li>Next: <a href="datetimes.html" title="next chapter">Dealing With Time</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, James Peter Schinner.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/order_request_formatting.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>async_v20.interface.transaction &#8212; async_v20 8.0.0b1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for async_v20.interface.transaction</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.decorators</span> <span class="k">import</span> <span class="n">endpoint</span>
+<span class="kn">from</span> <span class="nn">..definitions.types</span> <span class="k">import</span> <span class="n">TransactionID</span>
+<span class="kn">from</span> <span class="nn">..endpoints.annotations</span> <span class="k">import</span> <span class="n">FromTime</span>
+<span class="kn">from</span> <span class="nn">..endpoints.annotations</span> <span class="k">import</span> <span class="n">FromTransactionID</span>
+<span class="kn">from</span> <span class="nn">..endpoints.annotations</span> <span class="k">import</span> <span class="n">PageSize</span>
+<span class="kn">from</span> <span class="nn">..endpoints.annotations</span> <span class="k">import</span> <span class="n">ToTime</span>
+<span class="kn">from</span> <span class="nn">..endpoints.annotations</span> <span class="k">import</span> <span class="n">ToTransactionID</span>
+<span class="kn">from</span> <span class="nn">..endpoints.annotations</span> <span class="k">import</span> <span class="n">Type</span>
+<span class="kn">from</span> <span class="nn">..endpoints.transaction</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">..definitions.helpers</span> <span class="k">import</span> <span class="n">sentinel</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TransactionInterface&#39;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">TransactionInterface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="nd">@endpoint</span><span class="p">(</span><span class="n">GETTransactions</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">list_transactions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">from_time</span><span class="p">:</span> <span class="n">FromTime</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span>  <span class="c1"># TODO should default to account creation time</span>
+                          <span class="n">to_time</span><span class="p">:</span> <span class="n">ToTime</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span>  <span class="c1"># TODO should default to request time</span>
+                          <span class="n">page_size</span><span class="p">:</span> <span class="n">PageSize</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+                          <span class="n">type_</span><span class="p">:</span> <span class="n">Type</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a list of Transactions pages that satisfy a time-based Transaction</span>
+<span class="sd">        query.</span>
+
+<span class="sd">        Args:</span>
+
+<span class="sd">            from_time: :class:`~async_v20.endpoints.annotations.FromTime`</span>
+<span class="sd">                The starting time (inclusive) of the time range for the</span>
+<span class="sd">                Transactions being queried.</span>
+<span class="sd">            to_time: :class:`~async_v20.endpoints.annotations.ToTime`</span>
+<span class="sd">                The ending time (inclusive) of the time range for the</span>
+<span class="sd">                Transactions being queried.</span>
+<span class="sd">            page_size: :class:`~async_v20.endpoints.annotations.PageSize`</span>
+<span class="sd">                The number of Transactions to include in each page of the</span>
+<span class="sd">                results.</span>
+<span class="sd">            type_: :class:`~async_v20.endpoints.annotations.Type`</span>
+<span class="sd">                A filter for restricting the types of Transactions to retrieve.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            status [200]</span>
+<span class="sd">                :class:`~async_v20.interface.response.Response`</span>
+<span class="sd">                (from= :class:`~async_v20.DateTime`,</span>
+<span class="sd">                to= :class:`~async_v20.DateTime`,</span>
+<span class="sd">                pageSize= :class:`~builtins.int`,</span>
+<span class="sd">                type=( :class:`~async_v20.TransactionFilter`, ...),</span>
+<span class="sd">                count= :class:`~builtins.int`,</span>
+<span class="sd">                pages=( :class:`str`, ...),</span>
+<span class="sd">                lastTransactionID= :class:`~async_v20.TransactionID`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@endpoint</span><span class="p">(</span><span class="n">GETTransactionID</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get_transaction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transaction_id</span><span class="p">:</span> <span class="n">TransactionID</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the details of a single Account Transaction.</span>
+
+<span class="sd">        Args:</span>
+
+<span class="sd">            transaction_id: :class:`~async_v20.TransactionID`</span>
+<span class="sd">                A Transaction ID</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            status [200]</span>
+<span class="sd">                :class:`~async_v20.interface.response.Response`</span>
+<span class="sd">                (transaction= :class:`~async_v20.Transaction`,</span>
+<span class="sd">                lastTransactionID= :class:`~async_v20.TransactionID`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@endpoint</span><span class="p">(</span><span class="n">GETIDrange</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">transaction_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">from_transaction</span><span class="p">:</span> <span class="n">FromTransactionID</span><span class="p">,</span>
+                          <span class="n">to_transaction</span><span class="p">:</span> <span class="n">ToTransactionID</span><span class="p">,</span>  <span class="c1"># TODO make this default to now</span>
+                          <span class="n">type_</span><span class="p">:</span> <span class="n">Type</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a range of Transactions for an Account based on the Transaction</span>
+<span class="sd">        IDs.</span>
+
+<span class="sd">        Args:</span>
+
+<span class="sd">            from_transaction: :class:`~async_v20.endpoints.annotations.FromTransactionID`</span>
+<span class="sd">                The starting Transaction ID (inclusive) to fetch.</span>
+<span class="sd">            to_transaction: :class:`~async_v20.endpoints.annotations.ToTransactionID`</span>
+<span class="sd">                The ending Transaction ID (inclusive) to fetch.</span>
+<span class="sd">            type_: :class:`~async_v20.endpoints.annotations.Type`</span>
+<span class="sd">                The filter that restricts the types of Transactions to</span>
+<span class="sd">                retrieve.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            status [200]</span>
+<span class="sd">                :class:`~async_v20.interface.response.Response`</span>
+<span class="sd">                (transactions=( :class:`~async_v20.Transaction`, ...),</span>
+<span class="sd">                lastTransactionID= :class:`~async_v20.TransactionID`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@endpoint</span><span class="p">(</span><span class="n">GETSinceID</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">since_transaction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transaction_id</span><span class="p">:</span> <span class="n">TransactionID</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a range of Transactions for an Account starting at (but not</span>
+<span class="sd">        including) a provided Transaction ID.</span>
+
+<span class="sd">        Args:</span>
+
+<span class="sd">            transaction_id: :class:`~async_v20.TransactionID`</span>
+<span class="sd">                The ID of the last Transaction fetched. This query will return</span>
+<span class="sd">                all Transactions newer than the TransactionID.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            status [200]</span>
+<span class="sd">                :class:`~async_v20.interface.response.Response`</span>
+<span class="sd">                (transactions=( :class:`~async_v20.Transaction`, ...),</span>
+<span class="sd">                lastTransactionID= :class:`~async_v20.TransactionID`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@endpoint</span><span class="p">(</span><span class="n">GETTransactionsStream</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">stream_transactions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a stream of Transactions for an Account starting from when the</span>
+<span class="sd">        request is made.</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            status [200]</span>
+<span class="sd">                :class:`~async_v20.interface.response.Response`</span>
+<span class="sd">                (transaction= :class:`~async_v20.Transaction`)</span>
+
+
+<span class="sd">                **OR**</span>
+
+
+<span class="sd">                :class:`~async_v20.interface.response.Response`</span>
+<span class="sd">                (Heartbeat= :class:`~async_v20.TransactionHeartbeat`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">async_v20</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../best_practices.html">Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../beyond_getting_started.html">Beyond Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../order_request_formatting.html">Formatting Order Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../datetimes.html">Dealing With Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../health.html">Health API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../traps.html">Traps for young players</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">OandaClient API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../response.html">The Response Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../particularly_pertinent.html">Particularly Pertinent Programming Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../types.html">Class Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../annotations.html">Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../exceptions.html#warnings">Warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, James Peter Schinner.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
