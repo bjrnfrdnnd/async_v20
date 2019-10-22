@@ -1195,7 +1195,8 @@ class Transaction(Model):
                  guaranteed: bool = sentinel,
                  requested_units: AccountUnits = sentinel,
                  full_vwap: DecimalNumber = sentinel,
-                 guaranteed_execution_premium: DecimalNumber = sentinel):
+                 guaranteed_execution_premium: DecimalNumber = sentinel,
+                 dfdf: DateTime = sentinel):
         Model.__init__(**locals())
 
 
