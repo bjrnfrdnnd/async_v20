@@ -293,4 +293,5 @@ json_attributes = {'long': 'long', 'short': 'short', 'default': 'default', 'redu
                    'dividend': 'dividend',
                    'dividend_adjustment': 'dividendAdjustment',
                    'dfdf': 'dfdf',
+
                    }
