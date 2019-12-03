@@ -189,6 +189,7 @@ instance_attributes = {'long': 'long', 'short': 'short', 'default': 'default', '
                        # 'guaranteed_stop_loss_order_execution_premium': 'guaranteedStopLossOrderExecutionPremium',
                        'dividend': 'dividend',
                        'dividendAdjustment': 'dividend_adjustment',
+                       'lastDividendAdjustmentTimestamps': 'last_dividend_adjustment_timestamps',
                        'dfdf': 'dfdf',
                        }
 
@@ -292,5 +293,6 @@ json_attributes = {'long': 'long', 'short': 'short', 'default': 'default', 'redu
                    'guaranteed_stop_loss_order_execution_premium': 'guaranteedStopLossOrderExecutionPremium',
                    'dividend': 'dividend',
                    'dividend_adjustment': 'dividendAdjustment',
+                   'last_dividend_adjustment_timestamps': 'lastDividendAdjustmentTimestamps',
                    'dfdf': 'dfdf',
                    }

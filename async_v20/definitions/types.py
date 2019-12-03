@@ -3051,6 +3051,7 @@ class Account(AccountSummary):
                  guaranteed_stop_loss_order_mutability: str = sentinel,
                  dividend: DecimalNumber=sentinel,
                  dividend_adjustment: DecimalNumber = sentinel,
+                 last_dividend_adjustment_timestamps: list = sentinel,
                  ):
         Model.__init__(**locals())
 
