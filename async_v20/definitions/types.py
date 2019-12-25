@@ -2083,6 +2083,7 @@ class AccountSummary(Model):
                  guaranteed_execution_fees: AccountUnits = sentinel,
                  # guaranteed_stop_loss_order_mutability: str = sentinel,
                  dividend: AccountUnits = sentinel,
+                 dividendAdjustment: AccountUnits = sentinel,
                  ):
         Model.__init__(**locals())
 
