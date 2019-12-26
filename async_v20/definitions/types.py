@@ -7,6 +7,7 @@ __all__ = ['Account', 'AccountChanges', 'AccountChangesState', 'AccountPropertie
            'ArrayOpenTradeFinancing', 'ArrayOrder', 'ArrayOrderBookBucket', 'ArrayPosition', 'ArrayPositionBookBucket',
            'ArrayPositionFinancing', 'ArrayPrice', 'ArrayPriceBucket', 'ArrayStr', 'ArrayTrade', 'ArrayTradeID',
            'ArrayTradeReduce', 'ArrayTradeSummary', 'ArrayTransaction', 'ArrayTransactionFilter', 'ArrayTransactionID',
+           'ArrayDivdendAdjustmentTimestamp',
            'CalculatedPositionState', 'CalculatedTradeState', 'Candlestick', 'CandlestickData',
            'ClientConfigureRejectTransaction', 'ClientConfigureTransaction', 'ClientExtensions', 'ClientPrice',
            'CloseTransaction', 'CreateTransaction', 'DailyFinancingTransaction', 'DelayedTradeClosureTransaction',
@@ -1968,6 +1969,25 @@ class TradeClientExtensionsModifyTransaction(Transaction, type=TransactionType('
                  client_trade_id: ClientID = sentinel, trade_client_extensions_modify: ClientExtensions = sentinel):
         Model.__init__(**locals())
 
+class DividendAdjustmentTimestamp(Model):
+    """Probably the timestamp of the last dividend adjustment for an instrumet.
+    No description on OANDA's website (2019-12-27).
+
+    Attributes:
+        instrument: :class:`~async_v20.InstrumentName`
+            The name of the instrument
+        timestamp: :class:`~async_v20.DateTime`
+            The datetime of the last adjustment?
+    """
+
+    def __init__(self,
+                 instrument: Instrument = sentinel,
+                 timestamp: DateTime = sentinel):
+        Model.__init__(**locals())
+
+class ArrayDivdendAdjustmentTimestamp(Array, contains=DividendAdjustmentTimestamp):
+    pass
+
 
 class AccountSummary(Model):
     """A summary representation of a client's Account. The AccountSummary does not
@@ -2084,7 +2104,7 @@ class AccountSummary(Model):
                  # guaranteed_stop_loss_order_mutability: str = sentinel,
                  dividend: AccountUnits = sentinel,
                  dividend_adjustment: AccountUnits = sentinel,
-                 last_dividend_adjustment_timestamps: list = sentinel,
+                 last_dividend_adjustment_timestamps: ArrayDivdendAdjustmentTimestamp = sentinel,
                  ):
         Model.__init__(**locals())
 
@@ -4516,3 +4536,4 @@ class MarketOrder(Order, type=OrderType('MARKET')):
                  trade_closed_ids: ArrayTradeID = sentinel, cancelling_transaction_id: TransactionID = sentinel,
                  cancelled_time: DateTime = sentinel):
         Model.__init__(**locals())
+
