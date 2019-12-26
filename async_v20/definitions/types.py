@@ -1,3 +1,5 @@
+from async_v20.definitions.primitives import DaysCharged
+
 from .base import *
 from .primitives import *
 
@@ -7,7 +9,8 @@ __all__ = ['Account', 'AccountChanges', 'AccountChangesState', 'AccountPropertie
            'ArrayOpenTradeFinancing', 'ArrayOrder', 'ArrayOrderBookBucket', 'ArrayPosition', 'ArrayPositionBookBucket',
            'ArrayPositionFinancing', 'ArrayPrice', 'ArrayPriceBucket', 'ArrayStr', 'ArrayTrade', 'ArrayTradeID',
            'ArrayTradeReduce', 'ArrayTradeSummary', 'ArrayTransaction', 'ArrayTransactionFilter', 'ArrayTransactionID',
-           'ArrayDivdendAdjustmentTimestamp',
+           'ArrayDivdendAdjustmentTimestamp', 'ArrayFinancingDaysOfWeek',
+           'ArrayOpenTradeDividendAdjustment',
            'CalculatedPositionState', 'CalculatedTradeState', 'Candlestick', 'CandlestickData',
            'ClientConfigureRejectTransaction', 'ClientConfigureTransaction', 'ClientExtensions', 'ClientPrice',
            'CloseTransaction', 'CreateTransaction', 'DailyFinancingTransaction', 'DelayedTradeClosureTransaction',
@@ -31,7 +34,9 @@ __all__ = ['Account', 'AccountChanges', 'AccountChangesState', 'AccountPropertie
            'TradeReduce', 'TradeSummary', 'TrailingStopLossDetails', 'TrailingStopLossOrder',
            'TrailingStopLossOrderRejectTransaction', 'TrailingStopLossOrderRequest', 'TrailingStopLossOrderTransaction',
            'Transaction', 'TransactionHeartbeat', 'TransferFundsRejectTransaction', 'TransferFundsTransaction',
-           'UnitsAvailable', 'UnitsAvailableDetails', 'UserInfo', 'UserInfoExternal', 'VWAPReceipt']
+           'UnitsAvailable', 'UnitsAvailableDetails', 'UserInfo', 'UserInfoExternal', 'VWAPReceipt',
+           'DividendAdjustmentTimestamp', 'FinancingDaysOfWeek',
+           'Financing', 'OpenTradeDividendAdjustment']
 
 
 class ArrayStr(Array, contains=str):
@@ -507,7 +512,8 @@ class PositionSide(Model):
                  resettable_pl: AccountUnits = sentinel,
                  financing: AccountUnits = sentinel,
                  guaranteed_execution_fees: AccountUnits = sentinel,
-                 dividend: AccountUnits = sentinel):
+                 dividend: AccountUnits = sentinel,
+                 dividend_adjustment: AccountUnits = sentinel):
         Model.__init__(**locals())
 
 
@@ -541,7 +547,8 @@ class Position(Model):
                  short: PositionSide = sentinel, financing: AccountUnits = sentinel,
                  margin_used: AccountUnits = sentinel,
                  guaranteed_execution_fees: AccountUnits = sentinel,
-                 dividend: AccountUnits = sentinel):
+                 dividend: AccountUnits = sentinel,
+                 dividend_adjustment: AccountUnits = sentinel):
         Model.__init__(**locals())
 
 
@@ -1125,13 +1132,32 @@ class TradeSummary(Model):
                  client_extensions: ClientExtensions = sentinel, take_profit_order_id: OrderID = sentinel,
                  stop_loss_order_id: OrderID = sentinel, trailing_stop_loss_order_id: OrderID = sentinel,
                  margin_used: AccountUnits = sentinel,
-                 dividend: AccountUnits = sentinel):
+                 dividend: AccountUnits = sentinel,
+                 dividend_adjustment: AccountUnits = sentinel):
         Model.__init__(**locals())
 
 
 class ArrayTradeSummary(Array, contains=TradeSummary):
     pass
 
+class OpenTradeDividendAdjustment(Model):
+    '''
+    Dividend adjustments for open trades.
+    Not documented by OANDA (2019-12-27).
+
+    Attributes:
+        trade_id: :class:`~async_v20.TradeID`
+        dividend_adjustment: :class:`~async_v20.AccountUnits`
+    '''
+
+    def __init__(self,
+                 trade_id: TradeID,
+                 dividend_adjustment: AccountUnits,
+                 ):
+        Model.__init__(**locals())
+
+class ArrayOpenTradeDividendAdjustment(Array, contains=OpenTradeDividendAdjustment):
+    pass
 
 class Transaction(Model):
     """The base Transaction specification. Contains all possible attributes a transaction
@@ -1197,6 +1223,8 @@ class Transaction(Model):
                  requested_units: AccountUnits = sentinel,
                  full_vwap: DecimalNumber = sentinel,
                  guaranteed_execution_premium: DecimalNumber = sentinel,
+                 dividend_adjustment: AccountUnits = sentinel,
+                 open_trade_dividend_adjustments: ArrayOpenTradeDividendAdjustment = sentinel,
                  dfdf: DateTime = sentinel):
         Model.__init__(**locals())
 
@@ -1260,6 +1288,48 @@ class GuaranteedStopLossOrderLevelRestriction(Model):
     def __init__(self, volume: DecimalNumber = sentinel, price_range: DecimalNumber = sentinel):
         Model.__init__(**locals())
 
+class FinancingDaysOfWeek(Model):
+    """The number of days that a specific day of the week was charged for financing.
+    Not documented by OANDA (2019-12-27).
+
+    Attributes:
+        day_of_week: :class:`~async_v20.DayOfWeek`
+            The day of the week.
+        days_charged: :class:`~async_v20.DaysCharged`
+            The number of times this day of the week was charged.
+    """
+
+    def __init__(self,
+                 day_of_week: DayOfWeek = sentinel,
+                 days_charged: DaysCharged = sentinel,
+                 ):
+        Model.__init__(**locals())
+
+
+class ArrayFinancingDaysOfWeek(Array, contains=FinancingDaysOfWeek):
+    pass
+
+
+class Financing(Model):
+    """
+        The Financing details of a specific intstrument for a specific account?
+        Not documented by OANDA (2019-12-27)
+
+        Attributes:
+            long_rate: :class:`~async_v20.DecimalNumber`
+                The long rate.
+            short_rate: :class:`~async_v20.DecimalNumber`
+                The short rate.
+            financing_days_of_week: :class:`~async_v20.ArrayFinancingDaysOfWeek`
+                The number of times a weekday was charged.
+        """
+
+    def __init__(self,
+                 long_rate: LongRate = sentinel,
+                 short_rate: ShortRate = sentinel,
+                 financing_days_of_week: ArrayFinancingDaysOfWeek = sentinel,
+                 ):
+        Model.__init__(**locals())
 
 class Instrument(Model):
     """Full specification of an Instrument.
@@ -1315,6 +1385,7 @@ class Instrument(Model):
                  tags: ArrayDict = sentinel,
                  minimum_guaranteed_stop_loss_distance: DecimalNumber = sentinel,
                  # guaranteed_stop_loss_order_execution_premium: DecimalNumber = sentinel,
+                 financing: Financing = sentinel,
                  ):
         Model.__init__(**locals())
 
@@ -2530,7 +2601,9 @@ class Trade(Model):
                  take_profit_order: TakeProfitOrder = sentinel, stop_loss_order: StopLossOrder = sentinel,
                  trailing_stop_loss_order: TrailingStopLossOrder = sentinel,
                  margin_used: AccountUnits = sentinel,
-                 dividend: AccountUnits = sentinel):
+                 dividend: AccountUnits = sentinel,
+                 dividend_adjustment: AccountUnits = sentinel,
+                 ):
         Model.__init__(**locals())
 
 
@@ -3072,8 +3145,8 @@ class Account(AccountSummary):
                  guaranteed_execution_fees: AccountUnits = sentinel,
                  guaranteed_stop_loss_order_mutability: str = sentinel,
                  dividend: DecimalNumber=sentinel,
-                 dividend_adjustment: DecimalNumber = sentinel,
-                 last_dividend_adjustment_timestamps: list = sentinel,
+                 dividend_adjustment: AccountUnits = sentinel,
+                 last_dividend_adjustment_timestamps: ArrayDivdendAdjustmentTimestamp = sentinel,
                  ):
         Model.__init__(**locals())
 

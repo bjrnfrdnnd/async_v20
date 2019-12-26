@@ -190,6 +190,12 @@ instance_attributes = {'long': 'long', 'short': 'short', 'default': 'default', '
                        'dividend': 'dividend',
                        'dividendAdjustment': 'dividend_adjustment',
                        'lastDividendAdjustmentTimestamps': 'last_dividend_adjustment_timestamps',
+                       'longRate': 'long_rate',
+                       'shortRate': 'short_rate',
+                       'financingDaysOfWeek': 'financing_days_of_week',
+                       'dayOfWeek': 'day_of_week',
+                       'daysCharged': 'days_charged',
+                       'openTradeDividendAdjustments': 'open_trade_dividend_adjustments',
                        'dfdf': 'dfdf',
                        }
 
@@ -294,5 +300,11 @@ json_attributes = {'long': 'long', 'short': 'short', 'default': 'default', 'redu
                    'dividend': 'dividend',
                    'dividend_adjustment': 'dividendAdjustment',
                    'last_dividend_adjustment_timestamps': 'lastDividendAdjustmentTimestamps',
+                   'long_rate': 'longRate',
+                   'short_rate': 'shortRate',
+                   'financing_days_of_week': 'financingDaysOfWeek',
+                   'day_of_week': 'dayOfWeek',
+                   'days_charged': 'daysCharged',
+                   'open_trade_dividend_adjustments': 'openTradeDividendAdjustments',
                    'dfdf': 'dfdf',
                    }

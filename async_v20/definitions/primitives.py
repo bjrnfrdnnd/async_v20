@@ -16,7 +16,8 @@ __all__ = ['AcceptDatetimeFormat', 'AccountFinancingMode', 'AccountID', 'Account
            'PriceValue', 'Reason', 'RequestID', 'StopLossOrderReason', 'StopOrderReason',
            'TakeProfitOrderReason', 'TimeInForce', 'TradeID', 'TradePL', 'TradeSpecifier', 'TradeState',
            'TradeStateFilter', 'TrailingStopLossOrderReason', 'TransactionFilter', 'TransactionID',
-           'TransactionRejectReason', 'TransactionType', 'WeeklyAlignment', 'GuaranteedStopLossOrderMode']
+           'TransactionRejectReason', 'TransactionType', 'WeeklyAlignment', 'GuaranteedStopLossOrderMode',
+           'DayOfWeek', 'LongRate', 'ShortRate']
 
 
 class Primitive(object):
@@ -87,11 +88,12 @@ class AccountFinancingMode(str, Primitive):
         'SECOND_BY_SECOND': 'Second-by-second financing is paid/charged for open Trades in the Account, '
                             'both daily and when the the Trade is closed',
         'DAILY': 'A full day’s worth of financing is paid/charged for open Trades in the Account '
-                 'daily at 5pm New York time'
+                 'daily at 5pm New York time',
+        'SECOND_BY_SECOND_COMPONENT': 'not documented by OANDA (2019-12-27)',
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -105,7 +107,7 @@ class AccountID(str, Primitive):
     example = '001-011-5838423-001'
 
     def __new__(cls, value):
-        assert domain_check(value, example=cls.example)
+        assert domain_check(value, example=cls.example, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -126,7 +128,7 @@ class PositionAggregationMode(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -160,7 +162,7 @@ class CandlestickGranularity(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -180,7 +182,7 @@ class WeeklyAlignment(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -196,7 +198,7 @@ class PriceComponent(str, Primitive):
                           'MB', 'ABM', 'BMA', 'MAB', 'BA'}
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.value_permutations)
+        assert domain_check(value, possible_values=cls.value_permutations, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -215,7 +217,7 @@ class CancellableOrderType(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -251,7 +253,7 @@ class OrderPositionFill(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -282,7 +284,7 @@ class OrderState(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -300,7 +302,7 @@ class OrderStateFilter(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -330,7 +332,7 @@ class OrderTriggerCondition(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -350,7 +352,7 @@ class OrderType(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -369,7 +371,7 @@ class TimeInForce(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -385,7 +387,7 @@ class PriceStatus(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -440,7 +442,7 @@ class AcceptDatetimeFormat(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -520,7 +522,7 @@ class Direction(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -547,7 +549,7 @@ class InstrumentType(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -595,7 +597,7 @@ class TradePL(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -611,7 +613,7 @@ class TradeState(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -631,7 +633,7 @@ class TradeStateFilter(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -980,7 +982,7 @@ class TransactionFilter(str, Primitive):
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -1226,11 +1228,13 @@ class TransactionType(str, Primitive):
         'MARGIN_CALL_EXIT': 'Margin Call Exit Transaction',
         'DELAYED_TRADE_CLOSURE': 'Delayed Trade Closure Transaction',
         'DAILY_FINANCING': 'Daily Financing Transaction',
-        'RESET_RESETTABLE_PL': 'Reset Resettable PL Transaction'
+        'DIVIDEND': 'Dividend Transaction',
+        'DIVIDEND_ADJUSTMENT': 'not documented by OANDA (2019-12-27)',
+        'RESET_RESETTABLE_PL': 'Reset Resettable PL Transaction',
     }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
         return super().__new__(cls, value)
 
 
@@ -1245,5 +1249,48 @@ class GuaranteedStopLossOrderMode(str, Primitive):
               }
 
     def __new__(cls, value):
-        assert domain_check(value, possible_values=cls.values)
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
+        return super().__new__(cls, value)
+
+class DayOfWeek(str, Primitive):
+    """The days of the week
+    Not documented by OANDA (2019-12-27)
+    """
+
+    # Valid values
+    values = {'MONDAY': 'monday',
+              'TUESDAY': 'tuesday',
+              'WEDNESDAY': 'wednesday',
+              'THURSDAY': 'thursday',
+              'FRIDAY': 'friday',
+              'SATURDAY': 'saturday',
+              'SUNDAY': 'sunday',
+              }
+
+    def __new__(cls, value):
+        assert domain_check(value, possible_values=cls.values, class_checked=cls)
+        return super().__new__(cls, value)
+
+class DaysCharged(int, Primitive):
+    """The number of days charged in financing?
+    Not documented by OANDA (2019-12-27).
+    """
+    def __new__(cls, value):
+        return super().__new__(cls, value)
+
+
+class LongRate(float, Primitive):
+    """
+    The long rate for financing for a specific instrument?
+    Not documented by OANDA (2019-12-27)
+    """
+    def __new__(cls, value):
+        return super().__new__(cls, value)
+
+class ShortRate(float, Primitive):
+    """
+    The short rate for financing for a specific instrument?
+    Not documented by OANDA (2019-12-27)
+    """
+    def __new__(cls, value):
         return super().__new__(cls, value)
