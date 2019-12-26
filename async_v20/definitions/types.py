@@ -2042,7 +2042,7 @@ class TradeClientExtensionsModifyTransaction(Transaction, type=TransactionType('
 
 class DividendAdjustmentTimestamp(Model):
     """Probably the timestamp of the last dividend adjustment for an instrumet.
-    No description on OANDA's website (2019-12-27).
+    Not documented by OANDA (2019-12-27).
 
     Attributes:
         instrument: :class:`~async_v20.InstrumentName`
