@@ -1047,7 +1047,10 @@ class TransactionHeartbeat(Model):
 
     """
 
-    def __init__(self, type: str = sentinel, last_transaction_id: TransactionID = sentinel, time: DateTime = sentinel):
+    def __init__(self,
+                 type: str = sentinel,
+                 last_transaction_id: TransactionID = sentinel,
+                 time: DateTime = sentinel):
         Model.__init__(**locals())
 
 
