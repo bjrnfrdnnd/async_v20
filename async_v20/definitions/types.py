@@ -3121,6 +3121,11 @@ class Account(AccountSummary):
         orders: ( :class:`~async_v20.Order`, ...)
             The details of the Orders currently pending in the Account.
 
+        dividend: :class:`~async_v20.DecimalNumber`
+            The total amount of dividend paid over the lifetime of the Account in the
+            Account’s home currency.
+
+
     """
 
     def __init__(self, id: AccountID = sentinel, alias: str = sentinel, currency: Currency = sentinel,
