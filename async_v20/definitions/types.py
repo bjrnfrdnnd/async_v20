@@ -1465,6 +1465,7 @@ class AccountChangesState(Model):
                  resettable_pl: AccountUnits = sentinel,
                  commission: AccountUnits = sentinel,
                  guaranteed_execution_fees: AccountUnits = sentinel,
+                 financing: DecimalNumber = sentinel,
                  ):
         Model.__init__(**locals())
 
