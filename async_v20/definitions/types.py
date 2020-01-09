@@ -972,6 +972,10 @@ class Order(Model):
         delayed_trade_close: :class:`~async_v20.MarketOrderDelayedTradeClose`
         trigger_distance: :class:`~async_v20.PriceValue`
         is_trigger_distance_exact: :class:`bool`
+        
+        last_transaction_id:: :class:`~async_v20.TransactionID`
+            the last transactionId returned by oanda when querying for ArrayTrade. Not provided by OANDA. Added by bn.
+
     """
 
     # TODO: Update the annotation for partial_fill when OANDA responds to email, & `guaranteed`
@@ -1002,6 +1006,7 @@ class Order(Model):
                  trigger_distance: PriceValue = sentinel, is_trigger_distance_exact: bool = sentinel,
                  guaranteed: bool = sentinel,
                  guaranteed_execution_premium: DecimalNumber = sentinel,
+                 last_transaction_id: TransactionID = sentinel,
                  ):
         Model.__init__(**locals())
 

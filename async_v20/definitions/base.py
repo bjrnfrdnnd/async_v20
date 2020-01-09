@@ -89,12 +89,15 @@ class Metaclass(type):
 
 
 class Model(object, metaclass=Metaclass):
-    # Make attribute assignment impossible
+    # TODO: Make attribute assignment impossible
     __slots__ = ('_fields', '_str')
 
     _delimiter = '_'
 
     def __setattr__(self, key, value):
+        # #TODO: check somehow if the following is correct:
+        # result = self.__getattribute__('_' + key)()
+        # setattr(self,result,value)
         raise NotImplementedError
 
     def __delattr__(self, item):
