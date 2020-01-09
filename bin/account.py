@@ -12,7 +12,6 @@ logging_ini_path = os.path.join(ROOT_DIR, 'config', 'logging.ini')
 logging.config.fileConfig(logging_ini_path, disable_existing_loggers=False)
 
 logger = logging.getLogger('async_v20')
-logger.warning("dfdf")
 
 client = OandaClient()
 
