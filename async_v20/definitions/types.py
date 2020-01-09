@@ -38,7 +38,6 @@ __all__ = ['Account', 'AccountChanges', 'AccountChangesState', 'AccountPropertie
            'DividendAdjustmentTimestamp', 'FinancingDaysOfWeek',
            'Financing', 'OpenTradeDividendAdjustment']
 
-from .. import LastTransactionID
 
 
 class ArrayStr(Array, contains=str):
@@ -540,6 +539,10 @@ class Position(Model):
         short: :class:`~async_v20.PositionSide`
             The details of the short side of the Position.
 
+        last_transaction_id:: :class:`~async_v20.TransactionID`
+            the last transactionId returned by oanda when querying for ArrayPosition. Not provided by OANDA. Added by bn.
+
+
     """
 
     def __init__(self, instrument: InstrumentName = sentinel, pl: AccountUnits = sentinel,
@@ -550,7 +553,9 @@ class Position(Model):
                  margin_used: AccountUnits = sentinel,
                  guaranteed_execution_fees: AccountUnits = sentinel,
                  dividend: AccountUnits = sentinel,
-                 dividend_adjustment: AccountUnits = sentinel):
+                 dividend_adjustment: AccountUnits = sentinel,
+                 last_transaction_id: TransactionID = sentinel,
+                 ):
         Model.__init__(**locals())
 
 
@@ -1183,6 +1188,10 @@ class Transaction(Model):
         request_id: :class:`~async_v20.RequestID`
             The Request ID of the request which generated the transaction.
 
+        last_transaction_id:: :class:`~async_v20.TransactionID`
+            the last transactionId returned by oanda when querying for ArrayTransaction. Not provided by OANDA. Added by bn.
+
+
     """
 
     def __init__(self, id: TransactionID = sentinel, time: DateTime = sentinel, user_id: int = sentinel,
@@ -1230,6 +1239,8 @@ class Transaction(Model):
                  guaranteed_execution_premium: DecimalNumber = sentinel,
                  dividend_adjustment: AccountUnits = sentinel,
                  open_trade_dividend_adjustments: ArrayOpenTradeDividendAdjustment = sentinel,
+
+                 last_transaction_id: TransactionID = sentinel,
                  ):
         Model.__init__(**locals())
 
@@ -2595,8 +2606,8 @@ class Trade(Model):
         margin_used:
             Margin currently used by the Trade.
 
-        last_transaction_id:
-            the last transactionId returned by oanda when querying ArrayTrade. Not provided by OANDA. Added by bn.
+        last_transaction_id:: :class:`~async_v20.TransactionID`
+            the last transactionId returned by oanda when querying for ArrayTrade. Not provided by OANDA. Added by bn.
 
     """
 
@@ -2612,7 +2623,7 @@ class Trade(Model):
                  margin_used: AccountUnits = sentinel,
                  dividend: AccountUnits = sentinel,
                  dividend_adjustment: AccountUnits = sentinel,
-                 last_transaction_id: LastTransactionID = sentinel,
+                 last_transaction_id: TransactionID = sentinel,
                  ):
         Model.__init__(**locals())
 
