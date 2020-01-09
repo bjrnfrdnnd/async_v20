@@ -38,6 +38,8 @@ __all__ = ['Account', 'AccountChanges', 'AccountChangesState', 'AccountPropertie
            'DividendAdjustmentTimestamp', 'FinancingDaysOfWeek',
            'Financing', 'OpenTradeDividendAdjustment']
 
+from .. import LastTransactionID
+
 
 class ArrayStr(Array, contains=str):
     pass
@@ -1228,7 +1230,7 @@ class Transaction(Model):
                  guaranteed_execution_premium: DecimalNumber = sentinel,
                  dividend_adjustment: AccountUnits = sentinel,
                  open_trade_dividend_adjustments: ArrayOpenTradeDividendAdjustment = sentinel,
-                 dfdf: DateTime = sentinel):
+                 ):
         Model.__init__(**locals())
 
 
@@ -2593,6 +2595,9 @@ class Trade(Model):
         margin_used:
             Margin currently used by the Trade.
 
+        last_transaction_id:
+            the last transactionId returned by oanda when querying ArrayTrade. Not provided by OANDA. Added by bn.
+
     """
 
     def __init__(self, id: TradeID = sentinel, instrument: InstrumentName = sentinel, price: PriceValue = sentinel,
@@ -2607,6 +2612,7 @@ class Trade(Model):
                  margin_used: AccountUnits = sentinel,
                  dividend: AccountUnits = sentinel,
                  dividend_adjustment: AccountUnits = sentinel,
+                 last_transaction_id: LastTransactionID = sentinel,
                  ):
         Model.__init__(**locals())
 
