@@ -90,6 +90,8 @@ class AccountFinancingMode(str, Primitive):
         'DAILY': 'A full day’s worth of financing is paid/charged for open Trades in the Account '
                  'daily at 5pm New York time',
         'SECOND_BY_SECOND_COMPONENT': 'not documented by OANDA (2019-12-27)',
+        'DAILY_INSTRUMENT': 'not documented by OANDA (2020-01-11)',
+        'SECOND_BY_SECOND_INSTRUMENT': 'not documented by OANDA (2020-01-11)',
     }
 
     def __new__(cls, value):

@@ -52,7 +52,7 @@ def domain_check(value, example=None, possible_values=None, class_checked=None):
 
     if possible_values:
         if not value in possible_values:
-            msg = f'{value} must be in {possible_values}. Possible values are {possible_values}; class_checked: {class_checked}'
+            msg = f'{value} must be in {possible_values}; class_checked: {class_checked}'
             logger.error(msg)
             raise InvalidValue(msg)
 

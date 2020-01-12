@@ -739,10 +739,15 @@ class PositionFinancing(Model):
         open_trade_financings: ( :class:`~async_v20.OpenTradeFinancing`, ...)
             The financing paid/collecte for each open Trade within the Position.
 
+        account_financing_mode: :class:`~async_v20.AccountFinancingMode`
+            The account financing mode at the time of the daily financing.
+
+
     """
 
     def __init__(self, instrument: InstrumentName = sentinel, financing: AccountUnits = sentinel,
-                 open_trade_financings: ArrayOpenTradeFinancing = sentinel):
+                 open_trade_financings: ArrayOpenTradeFinancing = sentinel,
+                 account_financing_mode: AccountFinancingMode = sentinel,):
         Model.__init__(**locals())
 
 
@@ -972,6 +977,9 @@ class Order(Model):
         delayed_trade_close: :class:`~async_v20.MarketOrderDelayedTradeClose`
         trigger_distance: :class:`~async_v20.PriceValue`
         is_trigger_distance_exact: :class:`bool`
+        
+        last_transaction_id:: :class:`~async_v20.TransactionID`
+            the last transactionId returned by oanda when querying for ArrayTransaction. Not provided by OANDA. Added by bn.
     """
 
     # TODO: Update the annotation for partial_fill when OANDA responds to email, & `guaranteed`
@@ -1002,6 +1010,7 @@ class Order(Model):
                  trigger_distance: PriceValue = sentinel, is_trigger_distance_exact: bool = sentinel,
                  guaranteed: bool = sentinel,
                  guaranteed_execution_premium: DecimalNumber = sentinel,
+                 last_transaction_id: TransactionID = sentinel,
                  ):
         Model.__init__(**locals())
 
