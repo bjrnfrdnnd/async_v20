@@ -133,13 +133,8 @@ async def _stream_parser(self, response, endpoint, method_name):
 
 
 async def parse_response(self, response, endpoint, enable_rest, method_name):
-    if endpoint.host in 'REST HEALTH':
-        try:
-            result = await _rest_response(self, response, endpoint, enable_rest, method_name)
-        except URLDoesNotExistError:
-            result = None
-            logger.warning(f"Querying the Health API using path :{endpoint.path} failed")
-            result = None
+    if endpoint.host in 'REST':
+        result = await _rest_response(self, response, endpoint, enable_rest, method_name)
     else:
         result = _stream_parser(self, response, endpoint, method_name)
     return result

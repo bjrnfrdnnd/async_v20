@@ -6,7 +6,6 @@ from .pricing import *
 from .trade import *
 from .transaction import *
 from .user import *
-from .health import *
 __all__ = (
         account.__all__ +
         instrument.__all__ +
@@ -15,6 +14,5 @@ __all__ = (
         pricing.__all__ +
         trade.__all__ +
         transaction.__all__ +
-        user.__all__ +
-        health.__all__
+        user.__all__
 )

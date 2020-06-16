@@ -13,6 +13,5 @@ class Time(object):
 
 client = OandaClient(rest_host='127.0.0.1', rest_port=8080, rest_scheme='http',
                      stream_host='127.0.0.1', stream_port=8080, stream_scheme='http',
-                     health_host='127.0.0.1', health_port=8080, health_scheme='http',
                      rest_timeout=60, max_simultaneous_connections=1000, max_requests_per_second=99999,
                      token='')

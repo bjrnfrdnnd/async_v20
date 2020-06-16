@@ -1,7 +1,6 @@
 HEADER = 'header'
 PATH = 'path'
 QUERY = 'query'
-HEALTH = 'HEALTH'
 
 class EndPoint(object):
     """Base object representation of an endpoint"""

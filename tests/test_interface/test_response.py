@@ -74,7 +74,6 @@ async def test_response_dict(client, server):
                 client.get_account_details(),
                 client.get_candles('AUD_USD'),
                 client.list_accounts(),
-                client.list_services(),
                 client.list_open_trades(),
             ):
             check_types(rsp.dict())

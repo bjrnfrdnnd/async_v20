@@ -30,7 +30,7 @@ __version__ = '8.0.0b1'
 
 class OandaClient(AccountInterface, InstrumentInterface, OrderInterface, PositionInterface,
                   PricingInterface, TradeInterface, TransactionInterface, UserInterface,
-                  HealthInterface):
+                  ):
     """
     Create an API context for v20 access
 
@@ -48,9 +48,6 @@ class OandaClient(AccountInterface, InstrumentInterface, OrderInterface, Positio
         stream_port: The port of the v20 REST server
         rest_scheme: The scheme of the connection to rest server.
         stream_scheme: The scheme of the connection to the stream server.
-        health_host: The hostname of the health API server
-        health_port: The port of the health server
-        health_scheme: The scheme of the connection for the health server.
         datetime_format: The format to request when dealing with times
         rest_timeout: The timeout to use when making a polling request with
             the v20 REST server
@@ -117,9 +114,6 @@ class OandaClient(AccountInterface, InstrumentInterface, OrderInterface, Positio
                  stream_host='stream-fxpractice.oanda.com',
                  stream_port=None,
                  stream_scheme='https',
-                 health_host='api-status.oanda.com',
-                 health_port=80,
-                 health_scheme='http',
                  datetime_format='UNIX',
                  rest_timeout=10,
                  stream_timeout=60,
@@ -144,10 +138,7 @@ class OandaClient(AccountInterface, InstrumentInterface, OrderInterface, Positio
         # v20 STREAM API URL
         stream_host = partial(URL.build, host=stream_host, port=stream_port, scheme=stream_scheme)
 
-        # V20 API health URL
-        health_host = partial(URL.build, host=health_host, port=health_port, scheme=health_scheme)
-
-        self._hosts = {'REST': rest_host, 'STREAM': stream_host, 'HEALTH': health_host}
+        self._hosts = {'REST': rest_host, 'STREAM': stream_host}
 
         # The timeout to use when making a polling request with the
         # v20 REST server
@@ -300,15 +291,8 @@ class OandaClient(AccountInterface, InstrumentInterface, OrderInterface, Positio
                 self.initializing = True  # immediately set initializing to make sure
                 # Upcoming requests wait for this initialization to complete.
 
-                self._initialization_step = self.list_services.__name__
-                response = await self.list_services()
-                if response:
-                    for service in response.services:
-                        if service.current_event.status.name != 'Up':
-                            logger.warning(f'{service.name} {service.current_event.message}')
-                else:
-                    logger.warning('Server did not return available services; response is None')
-
+                # as we are not using the health api anymore, we can initialize the session right away
+                await self.initialize_session()
 
                 # Get the first account listed in in accounts.
                 # If another is desired the account must be configured
