@@ -23,7 +23,6 @@ async_v20/endpoints/__init__.py
 async_v20/endpoints/account.py
 async_v20/endpoints/annotations.py
 async_v20/endpoints/base.py
-async_v20/endpoints/health.py
 async_v20/endpoints/instrument.py
 async_v20/endpoints/order.py
 async_v20/endpoints/other_responses.py
@@ -35,7 +34,6 @@ async_v20/endpoints/user.py
 async_v20/interface/__init__.py
 async_v20/interface/account.py
 async_v20/interface/decorators.py
-async_v20/interface/health.py
 async_v20/interface/helpers.py
 async_v20/interface/instrument.py
 async_v20/interface/order.py
@@ -73,7 +71,6 @@ perftests/rest_implementation.py
 perftests/server.py
 tests/__init__.py
 tests/test_client.py
-tests/test_server_fixture.py
 tests/data/__init__.py
 tests/data/json_data.py
 tests/fixtures/__init__.py
@@ -85,7 +82,6 @@ tests/test_definitions/__init__.py
 tests/test_definitions/helpers.py
 tests/test_definitions/test_attributes.py
 tests/test_definitions/test_base.py
-tests/test_definitions/test_health_types.py
 tests/test_definitions/test_helpers.py
 tests/test_definitions/test_primitives.py
 tests/test_definitions/test_types.py

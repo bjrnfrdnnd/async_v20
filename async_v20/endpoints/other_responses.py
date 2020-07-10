@@ -22,5 +22,7 @@ other_responses = {
     416: error_response,
     # Excess requests will receive HTTP 429 error.
     # This restriction is applied against the requesting IP address.
-    429: error_response
+    429: error_response,
+    # Gateway Time-out
+    504: error_response,
 }
