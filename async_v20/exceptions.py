@@ -14,6 +14,10 @@ class ResponseTimeout(AsyncV20Exception):
     """The server took to long to respond"""
     pass
 
+class ClientOSError(AsyncV20Exception):
+    """Probably: Connection reset by peer"""
+    pass
+
 class URLDoesNotExistError(AsyncV20Exception):
     """The requested url does not exist (status 404 was returned)"""
     pass

@@ -73,6 +73,10 @@ async def _rest_response(self, response, endpoint, enable_rest, method_name):
         msg = f'{method_name} took longer than {self.rest_timeout} seconds'
         logger.warning(msg)
         raise ResponseTimeout(msg)
+    except aiohttp.ClientOSError as e:
+        msg = f'{method_name} raised ClientOSError: {e}'
+        logger.warning(msg)
+        raise ResponseTimeout(msg)
     else:
         response = await _create_response(json_body, endpoint, schema, status, boolean, self.datetime_format)
 

@@ -386,6 +386,7 @@ class Array(object):
 
                 key = json_model.get('instrument', json_model.get('name', None))
                 if key is not None:
+                    # print(key, json_model)
                     instrument_index.setdefault(key, []).append(index)
             except AttributeError:
                 break
