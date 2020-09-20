@@ -233,6 +233,7 @@ instance_attributes = {
     'factor': 'factor',
 }
 
+
 json_attributes = {
     'long': 'long', 'short': 'short', 'default': 'default', 'reduce_first': 'reduceFirst',
     'reduce_only': 'reduceOnly', 'open_only': 'openOnly', 'timestamp': 'timestamp',
