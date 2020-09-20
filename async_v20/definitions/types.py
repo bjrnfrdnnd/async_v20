@@ -1,5 +1,3 @@
-from async_v20.definitions.primitives import DaysCharged
-
 from .base import *
 from .primitives import *
 
@@ -716,16 +714,76 @@ class OpenTradeFinancing(Model):
             The ID of the Trade that financing is being paid/collected for.
         financing: :class:`~async_v20.AccountUnits`
             The amount of financing paid/collected for the Trade.
+        base_financing: :class:`~async_v20.DecimalNumber`
+            The amount of financing paid/collected in the Instrument’s base currency
+            for the Trade.
+        financing_rate: :class:`~async_v20.DecimalNumber`
+            The financing rate in effect for the instrument used to calculate the
+            amount of financing paid/collected when reducing the Trade. This field
+            will only be set if the AccountFinancingMode at the time of the order
+            fill is SECOND_BY_SECOND_INSTRUMENT. The value is in decimal
+            rather than percentage points, e.g. 5% is represented as 0.05.
 
     """
 
-    def __init__(self, trade_id: TradeID = sentinel, financing: AccountUnits = sentinel):
+    def __init__(self,
+                 trade_id: TradeID = sentinel,
+                 financing: AccountUnits = sentinel,
+                 base_financing: DecimalNumber = sentinel,
+                 financing_rate: DecimalNumber = sentinel,
+
+                 base_home_conversion_cost: DecimalNumber = sentinel,
+                 home_conversion_cost: DecimalNumber = sentinel,
+                 ):
         Model.__init__(**locals())
 
 
 class ArrayOpenTradeFinancing(Array, contains=OpenTradeFinancing):
     pass
 
+class ConversionFactor(Model):
+    """A ConversionFactor contains information used to convert an amount, from an Instrument’s base or quote currency, to the home currency of an Account.
+
+    Attributes:
+        factor: :class:`~async_v20.DecimalNumber`
+            The factor by which to multiply the amount in the given currency to
+            obtain the amount in the home currency of the Account.
+    """
+
+    def __init__(self,
+                 factor: DecimalNumber = sentinel,
+                 ):
+        Model.__init__(**locals())
+
+class HomeConversionFactors(Model):
+    """A HomeConversionFactors message contains information used to convert amounts, from an Instrument’s base or quote currency, to the home currency of an Account.
+
+    Attributes:
+        gain_quote_home: :class:`~async_v20.ConversionFactor`
+            The ConversionFactor in effect for the Account for converting any gains
+            realized in Instrument quote units into units of the Account’s home
+            currency.
+        loss_quote_home: :class:`~async_v20.ConversionFactor`
+            The ConversionFactor in effect for the Account for converting any losses
+            realized in Instrument quote units into units of the Account’s home
+            currency.
+        gain_base_home: :class:`~async_v20.ConversionFactor`
+            The ConversionFactor in effect for the Account for converting any gains
+            realized in Instrument base units into units of the Account’s home
+            currency.
+        loss_base_home: :class:`~async_v20.ConversionFactor`
+            The ConversionFactor in effect for the Account for converting any losses
+            realized in Instrument base units into units of the Account’s home
+            currency.
+        """
+
+    def __init__(self,
+                 gain_quote_home: ConversionFactor = sentinel,
+                 loss_quote_home: ConversionFactor = sentinel,
+                 gain_base_home: ConversionFactor = sentinel,
+                 loss_base_home: ConversionFactor = sentinel,
+                 ):
+        Model.__init__(**locals())
 
 class PositionFinancing(Model):
     """OpenTradeFinancing is used to pay/collect daily financing charge for a
@@ -738,16 +796,27 @@ class PositionFinancing(Model):
             The amount of financing paid/collected for the Position.
         open_trade_financings: ( :class:`~async_v20.OpenTradeFinancing`, ...)
             The financing paid/collecte for each open Trade within the Position.
-
         account_financing_mode: :class:`~async_v20.AccountFinancingMode`
             The account financing mode at the time of the daily financing.
-
-
+        base_financing: :class:`~async_v20.BaseFinancing`
+            The financing paid or collected when the Order was filled, in the
+            Instrument’s base currency.
+        home_conversion_factors: :class:`~async_v20.HomeConversionFactors`
+            The HomeConversionFactors in effect for the Position’s Instrument at the
+            time of the DailyFinancing.
     """
 
-    def __init__(self, instrument: InstrumentName = sentinel, financing: AccountUnits = sentinel,
+    def __init__(self,
+                 instrument: InstrumentName = sentinel,
+                 financing: AccountUnits = sentinel,
                  open_trade_financings: ArrayOpenTradeFinancing = sentinel,
-                 account_financing_mode: AccountFinancingMode = sentinel,):
+                 account_financing_mode: AccountFinancingMode = sentinel,
+                 base_financing: DecimalNumber = sentinel,
+                 home_conversion_factors: HomeConversionFactors = sentinel,
+
+                 base_home_conversion_cost: DecimalNumber = sentinel,
+                 home_conversion_cost: DecimalNumber = sentinel,
+                 ):
         Model.__init__(**locals())
 
 
@@ -1034,14 +1103,33 @@ class TradeReduce(Model):
             The PL realized when reducing the Trade
         financing: :class:`~async_v20.AccountUnits`
             The financing paid/collected when reducing the Trade
-
+        price: :class:`~async_v20.PriceValue`
+            The average price that the units were closed at. This price may be
+            clamped for guaranteed Stop Loss Orders.
+        guaranteed_execution_fee: :class:`~async_v20.AccountUnits`
+            This is the fee that is charged for closing the Trade if it has a
+            guaranteed Stop Loss Order attached to it.
+        half_spread_cost: :class:`~async_v20.AccountUnits`
+            The half spread cost for the trade reduce/close. This can be a positive
+            or negative value and is represented in the home currency of the Account.
+        financing_rate: :class:`~async_v20.DecimalNumber`
+            The financing rate in effect for the instrument used to calculate the
+            amount of financing paid/collected when reducing the Trade. This field
+            will only be set if the AccountFinancingMode at the time of the order
+            fill is SECOND_BY_SECOND_INSTRUMENT. The value is in decimal
+            rather than percentage points, e.g. 5% is represented as 0.05.
     """
 
-    def __init__(self, trade_id: TradeID = sentinel, units: DecimalNumber = sentinel,
+    def __init__(self,
+                 trade_id: TradeID = sentinel,
+                 units: DecimalNumber = sentinel,
                  realized_pl: AccountUnits = sentinel,
-                 financing: AccountUnits = sentinel, price: DecimalNumber = sentinel,
+                 financing: AccountUnits = sentinel,
+                 price: PriceValue = sentinel,
                  guaranteed_execution_fee: AccountUnits = sentinel,
-                 half_spread_cost: AccountUnits = sentinel):
+                 half_spread_cost: AccountUnits = sentinel,
+                 financing_rate: DecimalNumber = sentinel,
+                 ):
         Model.__init__(**locals())
 
 
@@ -1248,8 +1336,10 @@ class Transaction(Model):
                  guaranteed_execution_premium: DecimalNumber = sentinel,
                  dividend_adjustment: AccountUnits = sentinel,
                  open_trade_dividend_adjustments: ArrayOpenTradeDividendAdjustment = sentinel,
-
                  last_transaction_id: TransactionID = sentinel,
+
+                 base_home_conversion_cost: DecimalNumber = sentinel,
+                 home_conversion_cost: DecimalNumber = sentinel,
                  ):
         Model.__init__(**locals())
 
@@ -4645,4 +4735,3 @@ class MarketOrder(Order, type=OrderType('MARKET')):
                  trade_closed_ids: ArrayTradeID = sentinel, cancelling_transaction_id: TransactionID = sentinel,
                  cancelled_time: DateTime = sentinel):
         Model.__init__(**locals())
-

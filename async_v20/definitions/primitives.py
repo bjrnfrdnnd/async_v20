@@ -17,7 +17,7 @@ __all__ = ['AcceptDatetimeFormat', 'AccountFinancingMode', 'AccountID', 'Account
            'TakeProfitOrderReason', 'TimeInForce', 'TradeID', 'TradePL', 'TradeSpecifier', 'TradeState',
            'TradeStateFilter', 'TrailingStopLossOrderReason', 'TransactionFilter', 'TransactionID',
            'TransactionRejectReason', 'TransactionType', 'WeeklyAlignment', 'GuaranteedStopLossOrderMode',
-           'DayOfWeek', 'LongRate', 'ShortRate']
+           'DayOfWeek', 'LongRate', 'ShortRate', 'DaysCharged',]
 
 
 class Primitive(object):
@@ -1255,8 +1255,8 @@ class GuaranteedStopLossOrderMode(str, Primitive):
         return super().__new__(cls, value)
 
 class DayOfWeek(str, Primitive):
-    """The days of the week
-    Not documented by OANDA (2019-12-27)
+    """
+    The DayOfWeek provides a representation of the day of the week.
     """
 
     # Valid values
@@ -1274,8 +1274,8 @@ class DayOfWeek(str, Primitive):
         return super().__new__(cls, value)
 
 class DaysCharged(int, Primitive):
-    """The number of days charged in financing?
-    Not documented by OANDA (2019-12-27).
+    """
+    The number of days worth of financing to be charged on dayOfWeek.
     """
     def __new__(cls, value):
         return super().__new__(cls, value)
@@ -1283,16 +1283,20 @@ class DaysCharged(int, Primitive):
 
 class LongRate(float, Primitive):
     """
-    The long rate for financing for a specific instrument?
-    Not documented by OANDA (2019-12-27)
+    The financing rate to be used for a long position for the instrument. The
+    value is in decimal rather than percentage points, i.e. 5% is represented
+    as 0.05.
     """
     def __new__(cls, value):
         return super().__new__(cls, value)
 
 class ShortRate(float, Primitive):
     """
-    The short rate for financing for a specific instrument?
-    Not documented by OANDA (2019-12-27)
+    The financing rate to be used for a short position for the instrument.
+    The value is in decimal rather than percentage points, i.e. 5% is
+    represented as 0.05.
     """
     def __new__(cls, value):
         return super().__new__(cls, value)
+
+
